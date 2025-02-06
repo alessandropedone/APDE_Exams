@@ -121,13 +121,13 @@ Since we know that if a solution satisfies \(u \in L^s(0,T;\bm{L}^r) \text{ with
         This cannot be a classical solution, since it is not differentiable at \(x=0\). However, it is a weak solution. 
         Now we have to check the entropy condition, since there is a discontinuity. We first verify the Rankine-Hugoniot condition
         \[
-            s = \frac{f(u_r) - f(u_l)}{u_r - u_l} = \frac{\log(e) - \log(1)}{e - 1} = \frac{1}{e-1}.
+            s = \frac{f(u_r) - f(u_l)}{u_r - u_l} = \frac{\log(e) - \log(1)}{e - 1} = -\frac{1}{e-1}.
         \]
         To satisfy the entropy condition we need to have that the characteristics on both sides of the shock point towards the shock. To ensure this the condition \(s\) should be greater than the speed of the characteristic on the right side and less than the speed of the characteristic on the left side, \(u_L > s > u_R\) 
         \[
             \begin{aligned}
-                \text{Left side:} \quad & u_l = 1,  \quad \Rightarrow \quad \frac{1}{e-1} < 1 \qquad \text{True} \\
-                \text{Right side:} \quad & u_r = e,  \quad \Rightarrow \quad \frac{1}{e-1} > e \qquad \text{False}
+                \text{Left side:} \quad & u_l = 1,  \quad \Rightarrow \quad -\frac{1}{e-1} < 1 \qquad \text{True} \\
+                \text{Right side:} \quad & u_r = e,  \quad \Rightarrow \quad -\frac{1}{e-1} > e \qquad \text{False}
             \end{aligned}
         \]
         The entropy condition is not satisfied.
@@ -151,15 +151,15 @@ We can prove this with the help of Helmoltz decomposition. We can write any vect
 \]
 where \(\phi\) is the scalar potential and \(\psi\) is the vector potential. Our constraint is that the divergence of \(u\) is zero, so we have
 \[
-    \grad \cdot u = \grad \cdot \grad \phi + \grad \cdot \grad \times \psi = \Delta \phi = 0 \quad \Rightarrow \quad \phi = \text{const.}
+    \grad \cdot u = \grad \cdot \grad \phi + \grad \cdot \grad \times \psi = \Delta \phi = 0 \quad \Rightarrow \quad \grad \phi = \text{const.}
 \]
 This means that the scalar potential is constant and we can rewrite the decomposition
 \[
-    u = \grad \phi + \grad \times \psi = \grad \times \psi.
+    u = \grad \phi + \grad \times \psi = \grad \times \psi + C
 \]
 Now, choosing \(\psi\) such that satisfies the boundary condition, we can have infinitely many solutions, since 
 \[
-    \grad \cdot u = \grad \cdot \grad \times \psi = 0 \quad \forall \psi \in C^\infty(\Omega) \cap C^0(\overline{\Omega}).
+    \grad \cdot u = \grad \cdot \grad \times \psi + \grad \cdot C = 0 \quad \forall \psi \in  C^\infty(\Omega) \cap C^0(\overline{\Omega}).
 \]
 
 \newpage
@@ -588,9 +588,9 @@ Now we find the characteristics equations from
 which gives us
 \[
     x(t) = \begin{cases}
-        x_0 + t, & u = 1, x_0 < 0, \\
-        x_0 + (2 - 2x_0)t, & 2 - 2x_0 = 0, 0 < x_0 < 1, \\
-        x_0, & u = 0, x_0 > 1.
+        x_0 + t, & x_0 < 0, \\
+        x_0 + (2 - 2x_0)t, &  0 < x_0 < 1, \\
+        x_0, & x_0 > 1.
     \end{cases}
 \]
 Drawing the characteristics we have
@@ -644,12 +644,12 @@ Drawing the characteristics we have
         \end{axis}
     \end{tikzpicture}
 \end{center}
-that the shock happens at \(t=1\). 
-Therefore the function \(u(x,t)\) is defined continuous in \(\real \times [0, 1)\) and it is written as
+that the characteristic do not intersect at least until \(t=1\). 
+Therefore, the function \(u(x,t)\) is defined continuous in \(\real \times [0, 1)\) and it is written as
 \[
     u(x,t) = \begin{cases}
         1, & x \leq t, \\
-        \frac{1-2x}{1-2t}, & t < x < 1, \\
+        \frac{2-2x}{1-2t}, & t < x < 1, \\
         0, & x \geq 1.
     \end{cases}
 \]
@@ -666,7 +666,7 @@ The jump conditions states that
 \]
 Here we have that \(B(u) = \frac{u^2}{2}\), so the jump condition becomes
 \[
-    \eta'(t) = \frac{u_-^2 - u_+^2}{u_- - u_+} = \frac{1}{2}
+    \eta'(t) = \frac{u_+^2 - u_-^2}{u_+ - u_-} = \frac{1}{2}
 \]
 and the solution is
 \[
@@ -702,7 +702,7 @@ Therefore the solution satisfies the entropy condition.
         \item Assuming that \(f \in H^{-1}(\Omega)\), write the weak formulation of (P).
         \item Prove that this problem admits a unique weak solution.
         \item Show that the unique solution \(u\) satisfies the Dirichlet principle.
-        \item If \(f \in L^2(\Omega)\), in which space dimension \(n\) is it guaranteed that the solution \(u\) belongs to \(C^=0(\overline{\Omega})\)?
+        \item If \(f \in L^2(\Omega)\), in which space dimension \(n\) is it guaranteed that the solution \(u\) belongs to \(C^0(\overline{\Omega})\)?
     \end{enumerate}
 \end{exercise}
 \begin{enumerate}
