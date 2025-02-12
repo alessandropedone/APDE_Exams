@@ -127,46 +127,49 @@
     We can rewrite this as
     \[
         \begin{split}
-            cg'(s) + a g''(s) + g(s)^2 = 0
+            \frac{d}{ds} \left(cg(s) + a g'(s) + g(s)^2\right) = const.
         \end{split}
     \]
-    At this point we are working with an ODE, so we can solve it. We start by defining \(y(s) = g'(s)\) and obtain
+    We assume it is homogeneous, so we have
     \[
         \begin{split}
-            cy(s) - ay'(s) = y(s)^2 \Rightarrow ay'(s) = y(s)^2 - cy(s) 
+            g'(s) =- \frac{c}{a} g(s)  -\frac{1}{a} g(s)^2
         \end{split}
     \]
-    To solve this we introduce 
+    This is a Bernoulli equation, which can be solved by the substitution \(y(s) = g(s)^{-1}\). We obtain
     \[
-        z(s) = \frac{a}{y(s)} \Rightarrow z'(s) = - \frac{ay'(s)}{y(s)^2} 
+        y(s) = \frac{1}{g(s)} \Rightarrow y'(s) = -\frac{g'(s)}{g(s)^2} 
     \]
-    We substitute \(y'(s)\) and obtain
-    \[
-        \begin{split}
-            z'(s) = - \frac{cy(s) - y(s)^2}{y(s)^2} = -c \frac{1}{y(s)} + 1 \Rightarrow z'(s) = -c z(s) + 1
-        \end{split}
-    \]
-    Solving this ODE we obtain
+    We substitute this into the equation
     \[
         \begin{split}
-            z(s) = e^{-cs} \left(k + \int_0^s e^{ct} \, dt\right) = e^{-cs} \left(k + \left. \frac{e^{ct}}{c} \right|_0^s\right) =\\
-            = e^{-cs} \left(k + \frac{e^{cs} - 1}{c}\right) = k e^{-cs} + \frac{1}{c} - \frac{e^{-cs}}{c} = \\
-            = e^{-cs} \left(k - \frac{1}{c}\right) + \frac{1}{c} = k_0 e^{-cs} + \frac{1}{c}
+            \left(\frac{c}{a} g(s)  + \frac{1}{a} g(s)^2\right) \frac{1}{g(s)^2} = \frac{c}{a} y(s) + \frac{1}{a} = y'(s)
         \end{split}
     \]
-    At this point we use the definition of \(z(s)\) and obtain
+    So we have the ODE  
     \[
         \begin{split}
-            y(s) = \frac{a}{z(s)} = \frac{a}{k_0 e^{-cs} + \frac{1}{c}} = \frac{ac e^{cs}}{c k_0 + e^{cs}} = \frac{ac e^{cs}}{k_1 + e^{cs}}
+            y'(s) - \frac{c}{a} y(s) = \frac{1}{a}
         \end{split}
     \]
-    We have found the solution for \(g'(s)\), so we can integrate it to find \(g(s)\)
+    We can solve this ODE by multiplying by the integrating factor \(e^{\int \frac{c}{a} \, ds}\)
     \[
         \begin{split}
-            g(s) = a\int_0^s \frac{c e^{cs}}{k_1 + e^{cs}} \, ds = a\log(k_1 + e^{cs}) + ak_2
+            e^{\frac{c}{a}s} y'(s) - \frac{c}{a} e^{\frac{c}{a}s} y(s) = \frac{1}{a} e^{\frac{c}{a}s} \Rightarrow \left(e^{\frac{c}{a}s} y(s)\right)' = \frac{1}{a} e^{\frac{c}{a}s}
         \end{split}
     \]
-    We have found the solution for \(g(s) = a\log(k_1 + e^{cs}) + ak_2\).
+    We can now integrate both sides
+    \[
+        \begin{split}
+            e^{\frac{c}{a}s} y(s) = \frac{1}{a} \int e^{\frac{c}{a}s} \, ds \Rightarrow y(s) = \frac{1}{c} + C e^{-\frac{c}{a}s}
+        \end{split}
+    \]
+    We can now substitute back \(y(s) = g(s)^{-1}\) and solve for \(g(s)\)
+    \[
+        \begin{split}
+            g(s) = y(s)^{-1} = \frac{1}{\frac{1}{c} + C e^{-\frac{c}{a}s}}
+        \end{split}
+    \]
 \end{enumerate}
 
 \newpage
@@ -190,44 +193,20 @@ We start by assuming that there are two solutions \(u_1\) and \(u_2\). We define
         v(x, 0) = 0, \quad v_t(x, 0) = 0 & x \in (0, 1).
     \end{cases}
 \]
-Now we use the energy method. We multiply the equation by \(v_t\) and integrate over \(x\).
+Now we use the energy method. We define the energy functional
 \[
     \begin{split}
-        \int_0^1 v_t v_{tt} + d v_t^2 - v_t v_{xx} \, dx = 0
+        E(t) = \frac{1}{2} \int_0^1 \left(v_t^2 + v_x^2\right) \, dx
     \end{split}
 \]
-Let's do each term separately. We have
+Its derivative is 
 \[
     \begin{split}
-        \int_0^1 v_t v_{tt} \, dx = \frac{1}{2} \frac{d}{dt} \int_0^1 v_t^2 \, dx
+        \frac{d}{dt} E(t) = \int_0^t \left(v_t v_{tt} + v_x v_{xt}\right) \, dx = \int_0^1 v_t\left(-d v_t + v_{xx}\right) + \int_0^1 v_x v_{xt} \, dx = \\
+        -\int_0^1 d v_t^2 + \cancel{\left. v_t v_x \right|_0^1} - \int_0^1 v_x v_{xt} \, dx  + \int_0^1 v_x v_{xt} \, dx = -d \int_0^1 v_t^2 \, dx \leq 0
     \end{split}
 \]
-The second term is
-\[
-    \begin{split}
-        \int_0^1 d v_t^2 \, dx = d \int_0^1 v_t^2 \, dx
-    \end{split}
-\]
-The third term is
-\[
-    \begin{split}
-        \int_0^1 v_t v_{xx} \, dx = \cancel{\left. v_t v_x \right|_0^1} - \int_0^1 v_{xt} v_x \, dx = -\int_0^1 v_{xt} v_x \, dx = \frac{1}{2} \frac{d}{dt} \int_0^1 v_x^2 \, dx
-    \end{split}
-\]  
-We can now rewrite the equation as
-\[
-    \begin{split}
-        \frac{1}{2} \frac{d}{dt} \int_0^1 (1 + 2d) v_t^2 - v_x^2 \, dx = 0
-    \end{split}
-\]
-This means that the energy \(E(t)\) is conserved. We have \(E(0)\) as
-\[
-    \begin{split}
-        E(0) = \int_0^1 (1 + 2d) v_t(0)^2 - v_x(0)^2 \, dx = 0
-    \end{split}
-\]
-Since we have \(v_t(x,0) = 0\) and \(v_x(x,0) = 0\), we have \(E(0) = 0\). This means that \(E(t) = 0\) for all \(t\). Then, \(v_t = 0\) and \(v_x = 0\), which means that \(v = 0\). This means that the solution is unique.
-
+We have that the energy is decreasing, but also that is always positive. Taking \(E(0)\) we have that \(E(0) = 0\). This means that \(E(t) = 0\) for all \(t\), which means that \(v = 0\) and therefore \(u_1 = u_2\).  
 \newpage
 \begin{exercise}
     Let \(\Omega \coloneqq B(0, 1) \subset \real^n\), and let 
@@ -407,13 +386,13 @@ Since all the conditions are necessary, we have that \(\alpha \in (0, \min\{\fra
 \begin{enumerate}
     \item We start by writing the PDE in the form \(u_{tt} - \div(A \grad u) = f\). We have that
     \[
-        u_{tt} - \left(A_{11} u_{xx} + A_{22} u_{yy} + 2A_{12} u_{xy}\right) = f.
+        u_{t} - \left(A_{11} u_{xx} + A_{22} u_{yy} + 2A_{12} u_{xy}\right) = f.
     \]
     We can write the matrix \(A\) as
     \[
         A = \begin{pmatrix}
-            2 & 1 \\
-            1 & 3
+            2 & -1 \\
+            -1 & 3
         \end{pmatrix}
     \]
     and the PDE becomes
@@ -434,52 +413,89 @@ Since all the conditions are necessary, we have that \(\alpha \in (0, \min\{\fra
     \[
         \begin{split}
             \text{Find } u(t) \in L^2([0, T]; V) \text{ such that } \\
-            u' \in L^2([0, T];V'H)\text{ and } \\
+            u' \in L^2([0, T];H)\text{ and } \\
             \begin{cases}
                 \langle u_{t}(t), v \rangle + B(u(t), v) = (f(t), v)_H \\
                 u(0) = u_0,
             \end{cases}\quad \forall v \in V, \text{ in } \mathcal{D}(0, T).
         \end{split}
     \]
-    \item To sketch the proof of existence and uniqueness of a solution of the problem we need to use the Galerkin method. The advantage of the Galerkin method is that is finite-dimensional, so we can have as much regularity as we want. Let \(\left\{V_m\right\}\) be a Galerkin sequence for \(V\), and therefore for \(H\). Then, \(\exists \left\{u_0^m\right\} \subset V_m\) and \(\exists \left\{u_1^m\right\} \subset V_m\) such that \(u_0^m \to u_0\) in \(V\) and \(u_1^m \to u_1\) in \(H\). Let \(m = \dim V_m\) and consider a basis \(\left\{w_k^m\right\}\) for \(V_m\) orthonormal in \(H\). We now look for \(u_m = u_m(t)\) such that
+    \item To sketch the proof of existence and uniqueness of a solution of the problem we need to use the Galerkin method. The advantage of the Galerkin method is that is finite-dimensional, so we can have as much regularity as we want. Let \(\left\{V_m\right\}\) be a Galerkin sequence for \(V\), with a basis \(\left\{w_m \right\}\).
+    We can now write the weak formulation of the problem in the Galerkin space
+    \[
+        \begin{split}
+            \text{Find } u_m \in H^1((0, T); V_m) \text{ such that } \\
+            \begin{cases}
+                \left(u_m'(t), v_m\right)_H + B(u_m(t), v_m) = \langle f(t), v_m \rangle_H  \quad \forall v_m \in V_m \\
+                u_m(0) = P_m u_0
+            \end{cases}
+        \end{split} 
+    \]
+    We now have a finite number of linear ODEs, and for \(1 \leq k \leq m\) we have
     \[
         u_m(t) = \sum_{k=1}^m g_k^m(t) w_k^m
     \]
-    Moreover, for \(1 \leq k \leq m\) we have the system
+    So we want to solve the following system
     \[
         \begin{cases}
             g_m'(t) + B_m g_m(t) = \gamma_m(t) \\
             g_m(0) = g_0^m, 
         \end{cases}
     \]
-    Since \(g_m(t)\) is the unique solution of the system, we have that \(g_m(t)\) uniquely determines \(u_m(t)\). Then it is possible, starting from 
+    Since \(g_m(t)\) is the unique solution of the system, we have that \(g_m(t)\) uniquely determines \(u_m(t)\). Then it is possible, taking \(v_m = u_m\) to obtain
     \[
-        \frac{1}{2}\frac{d}{dt} \left[\norm{u_m(t)}_H^2 + \norm{u_m(t)}_V^2\right] = \left(f(t), u_m(t)\right)_H \qquad \text{a.e in } [0, T],
+        \frac{1}{2}\frac{d}{dt}\norm{u_m(t)}_H^2 + B(u_m(t), u_m(t)) = \langle f(t), u_m(t) \rangle \quad \forall t \in (0, T)
         \tag*{(E)}
     \]
-    to obtain the following a priori estimates
+    Integrating and using some inequalities gives us two a priori bounds
     \[
-        \norm{u_0}_{L^\infty(0, T; V)} \leq C_1 \qquad \norm{u_1}_{L^\infty(0, T; H)} \leq C_2
+        \norm{u_m(t)}_{L^\infty(0, T; H)} \leq K_1 \quad \text{and} \quad \norm{u_m(t)}_{L^2(0, T; V)} \leq K_2
     \]
-    And it can be shown that the weak formulation can be recovered up to a subsequence, and that \(u\) admits a weak derivative \(u' \in L^\infty(0, T; H)\).
-    Since 
+    Since the bounds are in \(L^2(0, T; V)\) and \(L^\infty(0, T; H)\), we have that up to  a subsequence 
+    \begin{align*}
+        \int_0^T \left(u_m(t), v(t)\right)_H \, dt &\to \int_0^T \left(u(t), v(t)\right)_H \, dt \quad \forall v \in L^1(0, T; H) \\
+        \int_0^T \left(u_m(t), v(t)\right)_V \, dt &\to \int_0^T \left(u(t), v(t)\right)_V \, dt \quad \forall v \in L^2(0, T; V)
+    \end{align*}
+    With these converges we are able to manage \(B(u_m, v_m)\) and \(\langle f, v_m \rangle\). We need some bounds on \(\langle u_t, v \rangle\). Using the weak derivative definition we can ``free'' the time derivative and obtain
+    \[
+        \begin{split}
+            - \int_0^T \left(u_m(t), v_t(t)\right)_H \phi'(t) \, dt - \left(u_m(0), v(0)\right)_H \phi(0) \\\to -\int_0^T \left(u(t), v_t(t)\right)_H \phi'(t) \, dt - \left(u(0), v(0)\right)_H \phi(0)
+        \end{split}
+    \]
+    We can integrate by parts and obtain
+    \[
+        \begin{split}
+            -\int_0^T \left(u(t), v\right)_H \phi'(t) \, dt + \left(u(0), v(0)\right)_H \phi(0) = \int_0^T \langle u_t(t), v \rangle \phi(t) \, dt 
+        \end{split}
+    \]
+    We have then that 
+    \[
+        \begin{split}
+            \langle u_t(t), v \rangle = - B(u(t), v) + \langle f(t), v \rangle
+        \end{split}
+    \]
+    Since \(B(u,v)\) is a bilinear continuous and coercive form, if we fix \(v\) we have that \(B(u, v)\) is a linear continuous functional. Then we have 
+    \[
+        \begin{split}
+            \langle u_t(t), v \rangle = \langle \mathcal{L}(t), v \rangle
+        \end{split}
+    \]
+    with \(\mathcal{L}(t) = -B(u(t), v) + \langle f(t), v \rangle \in L^2(0, T; V')\). Then 
     \[
     \begin{cases}
-        u \in L^\infty(0, T; V) \\
-        u' \in L^\infty(0, T; H) \\
+        u \in L^2(0, T; V) \\
+        u' \in L^2(0, T; V') \\
     \end{cases}
-    \Rightarrow u \in C^0([0, T]; H) 
+    \Rightarrow u \in C^0([0, T]; H). 
     \]
-    and \(V \subset H\), we have that \(u \in C^0([0, T]; H) \cap C_w^0([0, T]; V)\) and we have existence.
     Then we take two solutions \(u_1\) and \(u_2\) and we have that \(w = u_1 - u_2\) . Putting \(w\) in (E) we obtain
     \[
         \begin{cases}
-            \frac{1}{2}\frac{d}{dt} \left[\norm{w(t)}_H^2 + \norm{w(t)}_V^2\right] = 0 \\
-            w(0) = 0,
+            \frac{1}{2} \frac{d}{dt} \norm{w(t)}_H^2 + B(w(t), w(t)) = 0 \\
+            w(0) = 0
         \end{cases} 
-        \Rightarrow w = 0 \Rightarrow u_1 = u_2
     \]
-    and we have uniqueness.
+    Since both \(\norm{w(t)}_H^2\) and \(B(w(t), w(t))\) are positive, we have that \(\frac{1}{2} \frac{d}{dt} \norm{w(t)}_H^2 \leq 0\). This implies that \(w = 0\) and the solution is unique.
 \end{enumerate}
 
 \newpage
@@ -487,16 +503,16 @@ Since all the conditions are necessary, we have that \(\alpha \in (0, \min\{\fra
     Consider the conservation law with two different initial conditions
     \begin{equation*}
         a)\,\begin{cases}
-            u_t - u^5 u_x = 0, & x \in \real, t > 0, \\
+            u_t - 2u^5 u_x = 0, & x \in \real, t > 0, \\
             u(x,0) = \sqrt[5]{x}, & x \in \real,
         \end{cases}
         \qquad 
         b)\,\begin{cases}
-            u_t - \log(u) u_x = 0, & x \in \real, t > 0, \\
+            u_t - 2 u^5 u_x = 0, & x \in \real, t > 0, \\
             u(x,0) = -\sqrt[5]{x} & x \in \real.
         \end{cases}
     \end{equation*}
-    Determine tht maximal domain \(A\) of definition of the solution as continuous function: ecplain if they are also of class \(C^1(A)\) and satisfy the entropy condition.
+    Determine the maximal domain \(A\) of definition of the solution as continuous function: ecplain if they are also of class \(C^1(A)\) and satisfy the entropy condition.
 \end{exercise}
 \begin{enumerate}
     \item[\textbf{a)}] We look for solutions \(u(x, t) \in C^1(\real \times (0, \infty))\) that satisfy the conservation law and the initial condition. 
@@ -510,22 +526,21 @@ Since all the conditions are necessary, we have that \(\alpha \in (0, \min\{\fra
     \]
     with \(t=s\) since the initial condition is given at \(t=0\). 
     \[
-        \frac{dx}{ds} = u_0^5 \quad \Rightarrow \quad x(s) = x_0 + s u_0^5
+        \frac{dx}{ds} = 2u_0^5 \quad \Rightarrow \quad x(s) = x_0 + 2s u_0^5
     \]
-    Since \(u_0^5 = (\sqrt[5]{x_0})^5 = x_0\), we have that \(x(s) = x_0 + s x_0 = x_0(1+s)\). We can then write the solution as 
+    Since \(u_0^5 = (\sqrt[5]{x_0})^5 = x_0\), we have that \(x(s) = x_0 + 2s x_0 = x_0(1+2s)\). We can then write the solution as 
     \[
-        x(s) = x_0 + s x_0 = x_0(1+s) \quad \Rightarrow \quad x_0 = \frac{x}{1+s}.
+        x(s) = x_0 + 2s x_0 = x_0(1+2s) \quad \Rightarrow \quad x_0 = \frac{x}{1+2s}.
     \]
     The solution is then
     \[
-        u(x,t) = \sqrt[5]{\frac{x}{1+t}}.
+        u(x,t) = \sqrt[5]{\frac{x}{1+2t}}.
     \]
     This is a classical solution that remains smooth for all \(x \in \real\) and \(t > 0\), so the maximal domain of definition is \(A = \real \times (0, \infty)\). Let's compute the derivatives of \(u\)
-        \begin{align*}
-            u_x(x,t) &= \frac{1}{5} \frac{1}{\sqrt[5]{\frac{x}{1+t}}^4} \\
-            u_t(x,t) &= -\frac{1}{5(1+t)^2} \frac{1}{\sqrt[5]{\frac{x}{1+t}}^4}
-        \end{align*}
-    These are not continuous at \(x=0\), so the solution is not of class \(C^1(A)\). Since we do not have a discontinuity in our solution, the entropy condition is satisfied.
+    \begin{align*}
+        u_x(x,t) &= \frac{1}{5} \frac{1}{\sqrt[5]{\frac{x}{1+2t}}^4} 
+    \end{align*}
+    This is enough to show that it is not continuous at \(x=0\), so the solution is not of class \(C^1(A)\). Since we do not have a discontinuity in our solution, the entropy condition is satisfied.
     \item[\textbf{b)}] Now we look at the second case
     Its characteristics are given by
     \[
@@ -537,22 +552,21 @@ Since all the conditions are necessary, we have that \(\alpha \in (0, \min\{\fra
     \]
     with \(t=s\) since the initial condition is given at \(t=0\). 
     \[
-        \frac{dx}{ds} = u_0^5 \quad \Rightarrow \quad x(s) = x_0 + s u_0^5
+        \frac{dx}{ds} = u_0^5 \quad \Rightarrow \quad x(s) = x_0 + 2s u_0^5
     \]
-    Since \(u_0^5 = (-\sqrt[5]{x_0})^5 = -x_0\), we have that \(x(s) = x_0 - s x_0 = x_0(1-s)\). We can then write the solution as 
+    Since \(u_0^5 = (-\sqrt[5]{x_0})^5 = -x_0\), we have that \(x(s) = x_0 - 2s x_0 = x_0(1-2s)\). We can then write the solution as 
     \[
-        x(s) = x_0 + s x_0 = x_0(1+s) \quad \Rightarrow \quad x_0 = \frac{x}{1-s}.
+        x(s) = x_0 + s x_0 = x_0(1-2s) \quad \Rightarrow \quad x_0 = \frac{x}{1-2s}.
     \]
     The solution is then
     \[
-        u(x,t) = \sqrt[5]{\frac{x}{1-t}}.
+        u(x,t) = \sqrt[5]{\frac{x}{1-2t}}.
     \]
-    We can immediately see that this solution present a discontinuity in \(t=1\) so the maximal domain of definition is \(A = \real \times (0, 1)\). Let's compute the derivatives of \(u\)
+    We can immediately see that this solution present a discontinuity in \(t=1/2\) so the maximal domain of definition is \(A = \real \times (0, 1/2)\). Let's compute the derivatives of \(u\)
         \begin{align*}
             u_x(x,t) &= -\frac{1}{5} \frac{1}{\sqrt[5]{\frac{x}{1+t}}^4} \\
-            u_t(x,t) &= \frac{1}{5(1+t)^2} \frac{1}{\sqrt[5]{\frac{x}{1+t}}^4}
         \end{align*}
-    These are not continuous at \(x=0\), so the solution is not of class \(C^1(A)\). No idea about the entropy condition.
+    This is not continuous at \(x=0\), so the solution is not of class \(C^1(A)\). No idea about the entropy condition.
     \end{enumerate}
 
 \newpage
@@ -579,7 +593,7 @@ The first term becomes
 \begin{align*}
     \int_\Omega \Delta^2 u v \, dx &= - \int_\Omega \grad(\Delta u) \cdot \grad v \, dx + \int_{\partial \Omega} v \grad(\Delta u) \cdot \nu \, d\sigma = \\
     &= \int_\Omega \Delta u \Delta v \, dx - \int_{\partial \Omega} \Delta u \grad v \cdot \nu \, d\sigma + \int_{\partial \Omega} v \grad(\Delta u) \cdot \nu \, d\sigma = \\
-    &= \int_\Omega \Delta u \Delta v \, dx - \int_{\partial \Omega} \Delta u \frac{\partial v}{\partial \nu} \, d\sigma + \underbrace{\int_{\partial \Omega} v \frac{\partial \Delta u}{\partial \nu} \, d\sigma}_=0 = \\
+    &= \int_\Omega \Delta u \Delta v \, dx - \int_{\partial \Omega} \Delta u \frac{\partial v}{\partial \nu} \, d\sigma + \underbrace{\int_{\partial \Omega} v \frac{\partial \Delta u}{\partial \nu} \, d\sigma}_{=0} = \\
     &= \int_\Omega \Delta u \Delta v \, dx + \rho \int_{\partial \Omega} \frac{\partial u}{\partial \nu} \frac{\partial v}{\partial \nu} \, d\sigma = a(u, v)
 \end{align*}
 The variational formulation of the problem is then
@@ -693,7 +707,7 @@ Having all the conditions satisfied, we have that the problem is well-posed.
     \]
     to obtain the following a priori estimates
     \[
-        \norm{u_0}_{L^\infty(0, T; V)} \leq C_1 \qquad \norm{u_1}_{L^\infty(0, T; H)} \leq C_2
+        \norm{u_m}_{L^\infty(0, T; V)} \leq C_1 \qquad \norm{u_m'}_{L^\infty(0, T; H)} \leq C_2
     \]
     And it can be shown that the weak formulation can be recovered up to a subsequence, and that \(u\) admits a weak derivative \(u' \in L^\infty(0, T; H)\), and also that \(u'' \in L^2(0, T; V')\).
     Since 
@@ -793,14 +807,14 @@ Having all the conditions satisfied, we have that the problem is well-posed.
     Subtracting the two equations with \(w = u_1 - u_2\) we obtain
     \[
         \begin{split}
-            \eta \int_\Omega \grad w : \grad w \, dx b(u_1, u_1, v) - b(u_2, u_2, v) = 0 \qquad \forall v \in \bm{V}
+            \eta \int_\Omega \grad w : \grad w \, dx + b(u_1, u_1, v) - b(u_2, u_2, v) = 0 \qquad \forall v \in \bm{V}
         \end{split}
     \]
     We see that 
     \begin{align*}
         b(u_1, u_1, v) - b(u_2, u_2, v) &= b(u_1, u_1, v) - b(u_1, u_2, v) + b(u_1, u_2, v) - b(u_2, u_2, v) \\
         &= b(u_1, u_1 - u_2, v) + b(u_1 - u_2, u_2, v) \\
-        &= b(u1, w, v) + b(w, u2, v) \\
+        &= b(u_1, w, v) + b(w, u_2, v) \\
     \end{align*}
     We can now rewrite the equation as
     \[

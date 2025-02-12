@@ -242,6 +242,45 @@ Now we check if the given scalar products satisfy the properties.
         \end{aligned}
     \]
     This is true because derivatives and integrals are linear operators, and we can say that this map defines a scalar product.
+    Now we need to check that the induced norm is complete, meaning that each Cauchy sequence converges. We have the norm 
+    \[
+        \norm{u}_* = \sqrt{\langle u, u \rangle} = \sqrt{\int_{-1}^1 \left[ u''(x)^2 + u'(x)^2 + u(x)^2 \right] \, dx}.
+    \]
+    The standard norm in \(H^2_0(-1, 1)\) is
+    \[
+        \norm{u}_{H^2_0} = \sqrt{\int_{-1}^1 u''(x)^2 \, dx}.
+    \]
+    We can see that the two norms are equivalent, starting with the inequality
+    \begin{align*}
+        \norm{u}_{H^2_0} &\leq \norm{u}_* 
+    \end{align*}
+    we only need to prove the opposite inequality. We start from \(\int_{-1}^1 -u''(x) u (x) \, dx \) and obtain
+    \[
+        \begin{split}
+            \frac{1}{2} \norm{u''(x)}^2_{L^2} + \frac{1}{2} \norm{u}^2_{L^2} = \int_{-1}^1 \frac{u''(x)^2}{2} + \frac{u(x)^2}{2} \, dx \geq \int_{-1}^1 u''(x) u(x) \, dx =\\= \int_{-1}^1 u'(x) u'(x) \, dx - \cancel{\left. u'(x) u(x) \right|_{-1}^1} = \norm{u'}^2_{L^2}.
+        \end{split}
+    \]
+    Since by Poincaré inequality we have that \(\norm{u}_{L^2} \leq C \norm{u''}_{L^2}\), we have that \(\norm{u'}_{L^2}^2 \leq C \norm{u''}_{L^2}^2\), and also \(\norm{u}_{L^2}^2 \leq C \norm{u''}_{L^2}^2\). 
+    This means
+    \[
+        \norm{u}_{L^2}^2 + \norm{u'}_{L^2}^2 + \norm{u''}_{L^2}^2 \leq C \norm{u''}_{L^2}^2 \quad \Rightarrow \quad \norm{u}_* \leq C \norm{u}_{H^2_0}.
+    \]
+    This means that the two norms are equivalent, and since \(H^2_0(-1, 1)\) is complete, also the space defined by the scalar product is complete.
+    
+    Now we do the same proof for the space \(H^2(-1, 1) \cap H^1_0(-1, 1)\). We have the norm
+    \[
+        \norm{u}_* = \sqrt{\int_{-1}^1 \left[ u''(x)^2 + u'(x)^2 + u(x)^2 \right] \, dx}.
+    \]
+    The standard norm in \(H^2(-1, 1) \cap H^1_0(-1, 1)\) is
+    \[
+        \norm{u}_{H^2} = \sqrt{\int_{-1}^1 u''(x)^2 + u'(x)^2 \, dx}.
+    \]
+    We can clearly see that
+    \[
+        \norm{u}_{H^2} \leq \norm{u}_* \leq C \norm{u}_{H^2}.
+    \]
+    Now let's prove the othe inequality. by Poincaré inequality we have that \(\norm{u}_{L^2} \leq C \norm{u''}_{L^2}\), so we have
+    the same reasoning as before.
     \item For the second scalar product we have
     \[
         \begin{aligned}
@@ -250,6 +289,25 @@ Now we check if the given scalar products satisfy the properties.
         \end{aligned}
     \]
     Same reasoning as before, also for the symmetry and linearity properties, so also this map defines a scalar product.
+    Now we need to check that the induced norm is complete, meaning that each Cauchy sequence converges. For the first space \(H^2_0(-1, 1)\) we have the norm is already the standard norm, so the space is complete. For the second space \(H^2(-1, 1) \cap H^1_0(-1, 1)\) we have the norm
+    \[
+        \norm{u}_* = \sqrt{\int_{-1}^1 u''(x)^2 \, dx}.
+    \]
+    complies with the inequality
+    \[
+        \norm{u}_* \leq \norm{u}_{H^2\cap H^1_0}.
+    \]
+    To check the opposite inequality we start from \(\int_{-1}^1 -u''(x) u (x) \, dx \) and obtain
+    \[
+        \begin{split}
+            \frac{1}{2} \norm{u''(x)}^2_{L^2} + \frac{1}{2} \norm{u}^2_{L^2} = \int_{-1}^1 \frac{u''(x)^2}{2} + \frac{u(x)^2}{2} \, dx \geq \int_{-1}^1 u''(x) u(x) \, dx =\\= \int_{-1}^1 u'(x) u'(x) \, dx - \cancel{\left. u'(x) u(x) \right|_{-1}^1} = \norm{u'}^2_{L^2}.
+        \end{split}
+    \]
+    So we have that \(\norm{u''}_{L^2}^2 \geq \norm{u'}_{L^2}^2\). Since 
+    \[
+        \norm{u}_{H^2}^2 = \norm{u''}_{L^2}^2 + \norm{u'}_{L^2}^2 \leq C \norm{u''}_{L^2}^2 = C \norm{u}_*^2
+    \]
+
     \item We now need to determine a basis of the orthogonal complement of \(H^2_0(-1, 1)\) into \(H^2(-1, 1)\cap H^1_0(-1, 1)\) with respect to the scalar product \((M)\). 
     To do so, we need to find all the functions \(v \in H^2_0(-1, 1)\) such that
     \[
@@ -893,7 +951,7 @@ Therefore the solution satisfies the entropy condition.
     
         The exponent \(2^*\) is called critical exponent and is defined as \(2^* \coloneqq \frac{2n}{n - 2s}\).
     
-        If \(Omega\) is bounded, all these embeddings are compact except \(H^s(\Omega) \subset L^{2^*}\) when \(n > s\).
+        If \(\Omega\) is bounded, all these embeddings are compact except \(H^s(\Omega) \subset L^{2^*}\) when \(n > s\).
     \end{remark}
     
     Since we want to know the variational formulation in \(H^1_0\) we have \(s = 1\) and need to check \(n = 2, n \geq 3\). Remember a variational formulation makes sense if \(\int_\Omega fv < \infty\).
@@ -1003,14 +1061,14 @@ Therefore the solution satisfies the entropy condition.
     Subtracting the two equations with \(w = u_1 - u_2\) we obtain
     \[
         \begin{split}
-            \eta \int_\Omega \grad w : \grad w \, dx b(u_1, u_1, v) - b(u_2, u_2, v) = 0 \qquad \forall v \in \bm{V}
+            \eta \int_\Omega \grad w : \grad w \, dx + b(u_1, u_1, v) - b(u_2, u_2, v) = 0 \qquad \forall v \in \bm{V}
         \end{split}
     \]
     We see that 
     \begin{align*}
-        b(u_1, u_1, v) - b(u_2, u_2, v) &= b(u1, u1, v) - b(u1, u2, v) + b(u1, u2, v) - b(u2, u2, v) \\
-        &= b(u1, u1 - u2, v) + b(u1 - u2, u2, v) \\
-        &= b(u1, w, v) + b(w, u2, v) \\
+        b(u_1, u_1, v) - b(u_2, u_2, v) &= b(u_1, u_1, v) - b(u_1, u_2, v) + b(u_1, u_2, v) - b(u_2, u_2, v) \\
+        &= b(u_1, u_1 - u_2, v) + b(u_1 - u_2, u_2, v) \\
+        &= b(u_1, w, v) + b(w, u_2, v) \\
     \end{align*}
     We can now rewrite the equation as
     \[
@@ -1128,7 +1186,7 @@ Since \(w_t(x, 0) = 0\) and \(w(x,0) = 0 \Rightarrow w_{xx}(x, 0) = 0\). Therefo
 \begin{enumerate}
     \item We start by writing the PDE in the form \(u_{tt} - \div(A \grad u) = f\). We have that
     \[
-        u_{tt} - \left(A_{11} u_{xx} + A_{22} u_{yy} + 2A_{12} u_{xy}\right) = f.
+        u_{t} - \left(A_{11} u_{xx} + A_{22} u_{yy} + 2A_{12} u_{xy}\right) = f.
     \]
     We can write the matrix \(A\) as
     \[
@@ -1154,53 +1212,90 @@ Since \(w_t(x, 0) = 0\) and \(w(x,0) = 0 \Rightarrow w_{xx}(x, 0) = 0\). Therefo
     The weak formulation of the problem is then
     \[
         \begin{split}
-            \text{Find } u(t) \in L^2([0, T]; V) \text{ such that } \\
-            u' \in L^2([0, T];V'H)\text{ and } \\
+            \text{Find } u(t) \in L^2([0, T]; V)\cap C^0([0, T]; H)\text{ such that } \\
+            u' \in L^2([0, T];H)\text{ and } \\
             \begin{cases}
                 \langle u_{t}(t), v \rangle + B(u(t), v) = (f(t), v)_H \\
                 u(0) = u_0,
             \end{cases}\quad \forall v \in V, \text{ in } \mathcal{D}(0, T).
         \end{split}
     \]
-    \item To sketch the proof of existence and uniqueness of a solution of the problem we need to use the Galerkin method. The advantage of the Galerkin method is that is finite-dimensional, so we can have as much regularity as we want. Let \(\left\{V_m\right\}\) be a Galerkin sequence for \(V\), and therefore for \(H\). Then, \(\exists \left\{u_0^m\right\} \subset V_m\) and \(\exists \left\{u_1^m\right\} \subset V_m\) such that \(u_0^m \to u_0\) in \(V\) and \(u_1^m \to u_1\) in \(H\). Let \(m = \dim V_m\) and consider a basis \(\left\{w_k^m\right\}\) for \(V_m\) orthonormal in \(H\). We now look for \(u_m = u_m(t)\) such that
+    \item To sketch the proof of existence and uniqueness of a solution of the problem we need to use the Galerkin method. The advantage of the Galerkin method is that is finite-dimensional, so we can have as much regularity as we want. Let \(\left\{V_m\right\}\) be a Galerkin sequence for \(V\), with a basis \(\left\{w_m \right\}\).
+    We can now write the weak formulation of the problem in the Galerkin space
+    \[
+        \begin{split}
+            \text{Find } u_m \in H^1((0, T); V_m) \text{ such that } \\
+            \begin{cases}
+                \left(u_m'(t), v_m\right)_H + B(u_m(t), v_m) = \langle f(t), v_m \rangle_H  \quad \forall v_m \in V_m \\
+                u_m(0) = P_m u_0
+            \end{cases}
+        \end{split} 
+    \]
+    We now have a finite number of linear ODEs, and for \(1 \leq k \leq m\) we have
     \[
         u_m(t) = \sum_{k=1}^m g_k^m(t) w_k^m
     \]
-    Moreover, for \(1 \leq k \leq m\) we have the system
+    So we want to solve the following system
     \[
         \begin{cases}
             g_m'(t) + B_m g_m(t) = \gamma_m(t) \\
             g_m(0) = g_0^m, 
         \end{cases}
     \]
-    Since \(g_m(t)\) is the unique solution of the system, we have that \(g_m(t)\) uniquely determines \(u_m(t)\). Then it is possible, starting from 
+    Since \(g_m(t)\) is the unique solution of the system, we have that \(g_m(t)\) uniquely determines \(u_m(t)\). Then it is possible, taking \(v_m = u_m\) to obtain
     \[
-        \frac{1}{2}\frac{d}{dt} \left[\norm{u_m(t)}_H^2 + \norm{u_m(t)}_V^2\right] = \left(f(t), u_m(t)\right)_H \qquad \text{a.e in } [0, T],
+        \frac{1}{2}\frac{d}{dt}\norm{u_m(t)}_H^2 + B(u_m(t), u_m(t)) = \langle f(t), u_m(t) \rangle \quad \forall t \in (0, T)
         \tag*{(E)}
     \]
-    to obtain the following a priori estimates
+    Integrating and using some inequalities gives us two a priori bounds
     \[
-        \norm{u_0}_{L^\infty(0, T; V)} \leq C_1 \qquad \norm{u_1}_{L^\infty(0, T; H)} \leq C_2
+        \norm{u_m(t)}_{L^\infty(0, T; H)} \leq K_1 \quad \text{and} \quad \norm{u_m(t)}_{L^2(0, T; V)} \leq K_2
     \]
-    And it can be shown that the weak formulation can be recovered up to a subsequence, and that \(u\) admits a weak derivative \(u' \in L^\infty(0, T; H)\).
-    Since 
+    Since the bounds are in \(L^2(0, T; V)\) and \(L^\infty(0, T; H)\), we have that up to  a subsequence 
+    \begin{align*}
+        \int_0^T \left(u_m(t), v(t)\right)_H \, dt &\to \int_0^T \left(u(t), v(t)\right)_H \, dt \quad \forall v \in L^1(0, T; H) \\
+        \int_0^T \left(u_m(t), v(t)\right)_V \, dt &\to \int_0^T \left(u(t), v(t)\right)_V \, dt \quad \forall v \in L^2(0, T; V)
+    \end{align*}
+    With these converges we are able to manage \(B(u_m, v_m)\) and \(\langle f, v_m \rangle\). We need some bounds on \(\langle u_t, v \rangle\). Using the weak derivative definition we can ``free'' the time derivative and obtain
+    \[
+        \begin{split}
+            - \int_0^T \left(u_m(t), v_t(t)\right)_H \phi'(t) \, dt - \left(u_m(0), v(0)\right)_H \phi(0) \\\to -\int_0^T \left(u(t), v_t(t)\right)_H \phi'(t) \, dt - \left(u(0), v(0)\right)_H \phi(0)
+        \end{split}
+    \]
+    We can integrate by parts and obtain
+    \[
+        \begin{split}
+            -\int_0^T \left(u(t), v\right)_H \phi'(t) \, dt + \left(u(0), v(0)\right)_H \phi(0) = \int_0^T \langle u_t(t), v \rangle \phi(t) \, dt 
+        \end{split}
+    \]
+    We have then that 
+    \[
+        \begin{split}
+            \langle u_t(t), v \rangle = - B(u(t), v) + \langle f(t), v \rangle
+        \end{split}
+    \]
+    Since \(B(u,v)\) is a bilinear continuous and coercive form, if we fix \(v\) we have that \(B(u, v)\) is a linear continuous functional. Then we have 
+    \[
+        \begin{split}
+            \langle u_t(t), v \rangle = \langle \mathcal{L}(t), v \rangle
+        \end{split}
+    \]
+    with \(\mathcal{L}(t) = -B(u(t), v) + \langle f(t), v \rangle \in L^2(0, T; V')\). Then 
     \[
     \begin{cases}
-        u \in L^\infty(0, T; V) \\
-        u' \in L^\infty(0, T; H) \\
+        u \in L^2(0, T; V) \\
+        u' \in L^2(0, T; V') \\
     \end{cases}
-    \Rightarrow u \in C^0([0, T]; H) 
+    \Rightarrow u \in C^0([0, T]; H). 
     \]
-    and \(V \subset H\), we have that \(u \in C^0([0, T]; H) \cap C_w^0([0, T]; V)\) and we have existence.
     Then we take two solutions \(u_1\) and \(u_2\) and we have that \(w = u_1 - u_2\) . Putting \(w\) in (E) we obtain
     \[
         \begin{cases}
-            \frac{1}{2}\frac{d}{dt} \left[\norm{w(t)}_H^2 + \norm{w(t)}_V^2\right] = 0 \\
-            w(0) = 0,
+            \frac{1}{2} \frac{d}{dt} \norm{w(t)}_H^2 + B(w(t), w(t)) = 0 \\
+            w(0) = 0
         \end{cases} 
-        \Rightarrow w = 0 \Rightarrow u_1 = u_2
     \]
-    and we have uniqueness.
+    Since both \(\norm{w(t)}_H^2\) and \(B(w(t), w(t))\) are positive, we have that \(\frac{1}{2} \frac{d}{dt} \norm{w(t)}_H^2 \leq 0\). This implies that \(w = 0\) and the solution is unique.
 \end{enumerate}
 
 \newpage
@@ -1213,11 +1308,11 @@ Since \(w_t(x, 0) = 0\) and \(w(x,0) = 0 \Rightarrow w_{xx}(x, 0) = 0\). Therefo
         \end{cases}
         \qquad 
         b)\,\begin{cases}
-            u_t - \log(u) u_x = 0, & x \in \real, t > 0, \\
+            u_t - u^3 u_x = 0, & x \in \real, t > 0, \\
             u(x,0) = -\sqrt[3]{x} & x \in \real.
         \end{cases}
     \end{equation*}
-    Determine tht maximal domain \(A\) of definition of the solution as continuous function: ecplain if they are also of class \(C^1(A)\) and satisfy the entropy condition.
+    Determine the maximal domain \(A\) of definition of the solution as continuous function: explain if they are also of class \(C^1(A)\) and satisfy the entropy condition.
 \end{exercise}
 \begin{enumerate}
     \item[\textbf{a)}] We look for solutions \(u(x, t) \in C^1(\real \times (0, \infty))\) that satisfy the conservation law and the initial condition. 
@@ -1247,7 +1342,8 @@ Since \(w_t(x, 0) = 0\) and \(w(x,0) = 0 \Rightarrow w_{xx}(x, 0) = 0\). Therefo
             u_t(x,t) &= -\frac{1}{3(1+t)^2} \frac{1}{\sqrt[3]{\frac{x}{1+t}}^2}
         \end{align*}
     These are not continuous at \(x=0\), so the solution is not of class \(C^1(A)\). Since we do not have a discontinuity in our solution, the entropy condition is satisfied.
-    \item[\textbf{b)}] Now we look at the second case
+    \item[\textbf{b)}] Now we look at the second case.
+    
     Its characteristics are given by
     \[
         \frac{du}{dt} = \frac{dt}{ds} \frac{du}{dt} + \frac{dx}{ds} \frac{du}{dx} = 0
@@ -1281,21 +1377,21 @@ Since \(w_t(x, 0) = 0\) and \(w(x,0) = 0 \Rightarrow w_{xx}(x, 0) = 0\). Therefo
     Let \(\Omega \subset \real^n\) with \(n \geq 2\) be a bounded domain with \(\partial \Omega \in C^\infty\) and let \(f \in H^3(\Omega)\). Determine the space dimension \(n\) for which the we can conclude that
     \begin{enumerate}
         \item \(f \in L^4(\Omega)\).
-        \item \(f \in C^0(\overline{{Omega}})\).
+        \item \(f \in C^0(\overline{\Omega})\).
         \item \(\gamma_0 f \in H^{5/2}(\Omega)\).
     \end{enumerate}
 \end{exercise}
 We start by recalling the Sobolev embeddings with \(2s = 6\)
 \begin{align*}
-    H^2(\Omega) &\subset C(\Omega) && \text{ if } n < 6 \\
-    H^2(\Omega) &\subset L^p(\Omega) \qquad \forall 2 \leq p < \infty && \text{ if } n = 6 \\
-    H^2(\Omega) &\subset L^p(\Omega) \qquad \forall 2 \leq p \leq \frac{2n}{n - 6} && \text{ if } n > 6
+    H^3(\Omega) &\subset C^0(\Omega) && \text{ if } n < 6 \\
+    H^3(\Omega) &\subset L^p(\Omega) \qquad \forall 2 \leq p < \infty && \text{ if } n = 6 \\
+    H^3(\Omega) &\subset L^p(\Omega) \qquad \forall 2 \leq p \leq \frac{2n}{n - 6} && \text{ if } n > 6
 \end{align*}
 Then we check the statements
 \begin{enumerate}
-    \item In this case we have that \(f \in L^4(\Omega)\) if \(n = 6\), but we need to check when \(n > 6\). We have that \(2^* = \frac{2n}{n - 6}\) and we need to check if \(4 \leq 2^*\). We have that \(4 \leq \frac{2n}{n - 6}\) if \(n \geq 6\). But since we need \(n > 6\) we can conclude that \(f \in L^4(\Omega) \iff n =6\).
+    \item In this case we have that \(f \in L^4(\Omega)\) if \(n = 6\), but we need to check when \(n > 6\). We have that \(2^* = \frac{2n}{n - 6}\) and we need to check if \(4 \leq 2^*\). We have that \(4 \leq \frac{2n}{n - 6}\) if \(n \leq 12\). 
     \item In this case we need to check if \(f \in C^0(\overline{\Omega})\). We have that \(f \in C^0(\overline{\Omega})\) if \(n < 6\). 
-    \item In this case we proceed as before, but with \(j = 0\). We have that \(\gamma_0(f) \in H^{3 - 0 - 1/2}(\partial\Omega) = H^{5/2}(\partial\Omega)\), this is true for all dimensions \(n\).
+    \item In this case we have \(\gamma_j f \in H^{s-j-1/2}(\Omega)\) with \(j = 0\). We have that \(\gamma_0(f) \in H^{3 - 0 - 1/2}(\partial\Omega) = H^{5/2}(\partial\Omega)\), this is true for all dimensions \(n\).
 \end{enumerate}
 
 
@@ -1354,7 +1450,7 @@ We can now check if this integral is finite
     \sigma_n &\int_0^1 \abs{\frac{\log(1 + \abs{\rho}^\alpha)2}{\abs{\rho}^3}}^2 \rho^{n-1} \, d\rho \\
     -2\sigma_n &\int_0^1 \abs{\frac{\alpha\abs{\rho}^{\alpha}2\log(1 + \abs{\rho}^\alpha)}{(1 + \abs{\rho}^\alpha)\abs{\rho}^6}} \rho^{n-1} \, d\rho
 \end{align*}
-Probably wrong not going to do do all this calculations. Assuming \(\grad f \in L^2(\Omega)\).
+Probably wrong not going to do all this calculations if you manage to solve it pleas correct it. Assuming \(\grad f \in L^2(\Omega)\).
 
 
 Now that we have checked that \(\grad f \in L^2(\Omega)\) and \(f \in L^2(\Omega)\) we only need to check that the weak derivative of \(f\) exists, since if it exists it is equal to the classical one. We have that the weak derivative of \(f\) exists if
