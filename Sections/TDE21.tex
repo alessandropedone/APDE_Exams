@@ -1169,23 +1169,19 @@ Before we start, a quick reminder on the properties of series of functions in \(
         \item \(\phi_n^{(k)} \to \phi^{(k)}\) uniformly on \([a, b]\) for all \(k \in \natural\)
     \end{itemize}
 \end{remark}
-Checking if \(\Lambda_{t_0, v}\) is linear we need to show that \(\Lambda_{t_0, v}(\alpha \phi + \beta \psi) = \alpha \Lambda_{t_0, v}(\phi) + \beta \Lambda_{t_0, v}(\psi)\). We have that
+\textit{Linearity.} It's easy to show that \(\Lambda_{t_0, v}(\alpha \phi + \beta \psi) = \alpha \Lambda_{t_0, v}(\phi) + \beta \Lambda_{t_0, v}(\psi)\).\\
+\textit{Continuity.} 
+We take advantage of the properties of the sequence of functions in \(\mathcal{D}([0, T])\). \\
+Let \(\left\{ \phi_n \right\}_{n} \subseteq \mathcal{D}([0, T])\) be a sequence of functions
+that converges to \(\phi \in \mathcal{D}([0, T])\). In particular, we know that \(\phi_n(t_0) \to \phi(t_0)\) as \(n \to \infty\), since \(\phi_n\) converges uniformly (and pointwise) to \(\phi\) on the compact set \([a, b]\).
+So we can exploit this fact to study the convergence of the images of the functions under \(\Lambda_{t_0, v}\).
 \[
     \begin{split}
-        \Lambda_{t_0, v}(\alpha \phi + \beta \psi) = \alpha \phi(t_0) v + \beta \psi(t_0) v = \alpha \Lambda_{t_0, v}(\phi) + \beta \Lambda_{t_0, v}(\psi)
+        \norm{\Lambda_{t_0, v}(\phi_n) - \Lambda_{t_0, v}(\phi)}_X & = \norm{\phi_n(t_0) v - \phi(t_0) v}_X =\\
+                                                                   & = \norm{(\phi_n(t_0) - \phi(t_0)) v}_X \leq \abs{\phi_n(t_0) - \phi(t_0)} \, \norm{v}_X \underset{n \to \infty}{\longrightarrow} 0
     \end{split}
 \]
-So our map is linear. Now we need to show that it is continuous. 
-To do that we take advantage of the properties of the sequence of functions in \(\mathcal{D}([0, T])\). Let \(\left\{ \phi_n \right\}_{n} \subseteq \mathcal{D}([0, T])\) be a sequence of functions that converges to \(\phi \in \mathcal{D}([0, T])\). 
-
-We have that \(\norm{\phi_n - \phi} \to 0\) as \(n \to \infty\). We can now compute the norm of the difference of the images of the functions
-\[
-    \begin{split}
-        \norm{\Lambda_{t_0, v}(\phi_n) - \Lambda_{t_0, v}(\phi)}_X = \norm{\phi_n(t_0) v - \phi(t_0) v}_X =\\
-        = \norm{(\phi_n(t_0) - \phi(t_0)) v}_X \leq \abs{\phi_n(t_0) - \phi(t_0)} \norm{v}_X \underset{n \to \infty}{\longrightarrow} 0
-    \end{split}
-\]
-So our map is also continuous. We have shown that \(\Lambda_{t_0, v} \in \mathcal{D}'([0, T], X)\).
+So our map is also continuous.
 
 \newpage
 \begin{exercise}

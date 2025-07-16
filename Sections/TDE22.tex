@@ -1054,13 +1054,8 @@ which is a contradiction. So there are no classical solutions to the problem.
     \end{align*}
     is an element of \(\mathcal{D}'(0, T; X)\).
 \end{exercise}
-We start by showing that \(\Lambda_{t_0, v}\) is a linear map. Let \(\phi, \psi \in \mathcal{D}(0, T)\) and \(\alpha, \beta \in \real\). We have
-\[
-    \begin{split}
-        \Lambda_{t_0, v}(\alpha \phi + \beta \psi) = 2 (\alpha \phi + \beta \psi)''(t_0) v =\\
-        = 2 (\alpha \phi''(t_0) + \beta \psi''(t_0)) v = \alpha 2 \phi''(t_0) v + \beta 2 \psi''(t_0) v = \alpha \Lambda_{t_0, v}(\phi) + \beta \Lambda_{t_0, v}(\psi)
-    \end{split}
-\]
+To show that \(\Lambda_{t_0, v} \in \mathcal{D}'([0, T], X)\) we need to show that it is a continuous linear functional on \(\mathcal{D}([0, T])\). 
+Before we start, a quick reminder on the properties of series of functions in \(\mathcal{D}([0, T])\).
 \begin{remark}
     Let \(\left\{ \phi_n \right\}_{n} \subseteq \mathcal{D}([0, T])\) be a sequence of functions that converges to \(\phi \in \mathcal{D}([0, T])\). Then we have that
     \begin{itemize}
@@ -1068,13 +1063,22 @@ We start by showing that \(\Lambda_{t_0, v}\) is a linear map. Let \(\phi, \psi 
         \item \(\phi_n^{(k)} \to \phi^{(k)}\) uniformly on \([a, b]\) for all \(k \in \natural\)
     \end{itemize}
 \end{remark}
-We now choose a sequence \(\left\{\phi_n\right\}_n \subset \mathcal{D}(0, T)\) such that \(\phi_n \to \phi\) in \(\mathcal{D}(0, T)\). We have that \(\norm{\phi_n - \phi}_{\mathcal{D}(0, T)} \to 0\) and \(\norm{\phi_n'' - \phi''}_{\mathcal{D}(0, T)} \to 0\) because the second derivative is a continuous operator. We now compute the norm of \(\Lambda_{t_0, v}(\phi_n) - \Lambda_{t_0, v}(\phi)\)
+\textit{Linearity.} 
+Let \(\phi, \psi \in \mathcal{D}(0, T)\) and \(\alpha, \beta \in \real\). We have
 \[
     \begin{split}
-        \norm{\Lambda_{t_0, v}(\phi_n) - \Lambda_{t_0, v}(\phi)}_X = \norm{2 \phi_n''(t_0) v - 2 \phi''(t_0) v}_X = \norm{2 (\phi_n''(t_0) - \phi''(t_0)) v}_X \leq \\
-        \leq 2 \norm{\phi_n''(t_0) - \phi''(t_0)}_\mathcal{D} \norm{v}_X = 2 \norm{\phi_n''(t_0) - \phi''(t_0)}_\mathcal{D} \to 0
+        \Lambda_{t_0, v}(\alpha \phi + \beta \psi) &= 2 (\alpha \phi + \beta \psi)''(t_0) v = 2 (\alpha \phi''(t_0) + \beta \psi''(t_0)) v \\
+                                                   &= \alpha 2 \phi''(t_0) v + \beta 2 \psi''(t_0) v = \alpha \Lambda_{t_0, v}(\phi) + \beta \Lambda_{t_0, v}(\psi)
+    \end{split}
+\]
+\textit{Continuity.}
+Let \(\left\{\phi_n\right\}_n \subseteq \mathcal{D}(0, T)\) be a sequence of functions that converges to \(\phi \in \mathcal{D}(0, T)\). 
+In particular, we know that \(\phi_n''(t_0) \to \phi''(t_0)\) as \(n \to \infty\), since \(\phi''_n\) converges uniformly (and pointwise) to \(\phi''\) on the compact set \([a, b]\).
+So we can exploit this fact to study the convergence of the images of the functions under \(\Lambda_{t_0, v}\).
+\[
+    \begin{split}
+        \norm{\Lambda_{t_0, v}(\phi_n) - \Lambda_{t_0, v}(\phi)}_X & = \norm{2 \phi_n''(t_0) v - 2 \phi''(t_0) v}_X = \norm{2 (\phi_n''(t_0) - \phi''(t_0)) v}_X \\
+        & \leq 2 \abs{\phi_n''(t_0) - \phi''(t_0)} \norm{v}_X\, \underset{n \to \infty}{\longrightarrow} 0
     \end{split} 
 \]
-We have shown that \(\Lambda_{t_0, v}\) is a continuous linear map, so it is an element of \(\mathcal{D}'(0, T; X)\).
-
-    
+So our map is also continuous.
