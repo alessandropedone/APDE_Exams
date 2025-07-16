@@ -205,20 +205,28 @@ Since \(\alpha(x)\) is bounded (is a function in \(H^1_0\)) we have that the ene
 \end{exercise}
 
 By the definition of distributional derivative we have
-\[
-    (\Lambda_u(\phi))' = - \Lambda_u(\phi') \forall \phi \in \mathcal{D}(0, T)
-\]
-where 
-\[
-    \Lambda_u(\phi)' = - \int_0^T \phi'(t) u(t) \, dt
-\]
-We can integrate by parts the above expression
+\begin{equation} \label{eq:distributional_derivative}
+    (\Lambda_u)'(\phi) = - \Lambda_u(\phi') =  - \int_0^T \phi'(t) u(t) \, dt \qquad \forall \phi \in \mathcal{D}(0, T)
+\end{equation}
+We can prove that the Fundamental Theorem of Calculus implies the integration by parts formula. 
+First we apply it to the function \(u \phi\) where \(\phi \in \mathcal{D}(0, T)\) and we have
+\begin{equation*}
+    \int_0^T (u\phi)'(t) \, dt \int_0^T (u\phi)'(t) \, dt = (u \phi) (T) - (u \phi) (0)
+\end{equation*}
+But we also notice the following two equalities
 \[
     \begin{split}
-        (\Lambda_u(\phi))' = - \int_0^T \phi'(t) u(t) \, dt =  \underbrace{\left. - \phi(t) u(t) \right|_0^T}_{=0} + \int_0^T \phi(t) u'(t) \, dt = \int_0^T \phi(t) u'(t) \, dt = \Lambda_{u'}(\phi)
+        \int_0^T (u\phi)'(t) \, dt &= \int_0^T u'(t) \phi(t) \, dt + \int_0^T u(t) \phi'(t) \, dt\\
+        (u \phi) (T) - (u \phi) (0) &= 0 \text{ since } \phi(T) = \phi(0) = 0 \\
     \end{split}
 \]
-We have shown that \(\Lambda_{u'} = (\Lambda_u)'\) in \(\mathcal{D}'(0, T; X)\).
+So now we can integrate by parts \eqref{eq:distributional_derivative} and obtain
+\[
+    \begin{split}
+        (\Lambda_u(\phi))' = - \int_0^T \phi'(t) u(t) \, dt = \int_0^T \phi(t) u'(t) \, dt = \Lambda_{u'}(\phi)
+    \end{split}
+\]
+So, we have shown that \(\Lambda_{u'} = (\Lambda_u)'\) in \(\mathcal{D}'(0, T; X)\).
 
 \newpage
 \subsection{July 2021}
@@ -841,7 +849,7 @@ It is clear now clear why we need to check that the boundary term goes to zero. 
         \int_{\partial\Omega_\epsilon} f \phi \nu_i \, d\sigma = \cancel{\int_{\partial B_1} f \phi \nu_i \, d\sigma} + \int_{\partial B_\epsilon} f \phi \nu_i \, d\sigma
     \end{split}
 \]
-And we can neglet the first one since we know that \(\text{supp } \phi \subseteq B_1\).
+And we can neglet the first one since we know that $\phi = 0$ on $\partial B_1$.
 Moreover,
 \[
     \begin{split}
