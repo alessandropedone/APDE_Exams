@@ -813,7 +813,7 @@ So what we want to show is that taking the limit as \(\epsilon \to 0\) in \eqref
 To do so we need to check that the boundary term goes to zero, and the other two terms converge to the ones in \eqref{eq:weak_derivative}. \\
 We start with the first term
 \[ 
-     \begin{split}
+    \begin{split}
         \int_{\Omega_\epsilon} f \partial_{x_i} \phi \, dx = \int_{B_1} f \partial_{x_i} \phi \chi_{\Omega_\epsilon} \, dx
     \end{split}
 \]
@@ -836,13 +836,12 @@ The same process can be applied to
     \end{split}
 \]
 It is clear now clear why we need to check that the boundary term goes to zero. In particular it is composed by the following two integrals.
-
 \[
     \begin{split}
         \int_{\partial\Omega_\epsilon} f \phi \nu_i \, d\sigma = \cancel{\int_{\partial B_1} f \phi \nu_i \, d\sigma} + \int_{\partial B_\epsilon} f \phi \nu_i \, d\sigma
     \end{split}
 \]
-And we can neglet the first one since we know that \(\text{supp } \phi \subseteq B_\epsilon\).
+And we can neglet the first one since we know that \(\text{supp } \phi \subseteq B_1\).
 Moreover,
 \[
     \begin{split}
