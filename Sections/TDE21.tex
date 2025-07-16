@@ -1155,25 +1155,25 @@ So we have shown that \(f \in W^{1, p}(B) \iff n > 3 \land 1 \leq p < \frac{n}{3
 \begin{exercise}
     Let \((X, \norm{\cdot})\) be a Banach space and let \(v \in X\) such that \(\norm{v} = 1\). Moreover, let \(T > 0\) and let \(t_0 \in (0, T)\) be fixed. Prove that the map 
     \begin{align*}
-        \Lambda_{t_0, v} \colon \mathcal{D}([0, T]) &\to X \\
+        \Lambda_{t_0, v} \colon \mathcal{D}(0, T) &\to X \\
         \Lambda_{t_0, v}(\phi) &\coloneqq \phi(t_0) v \in X
     \end{align*}
-    belongs to \(\mathcal{D}'([0, T], X)\).
+    belongs to \(\mathcal{D}'(0, T, X)\).
 \end{exercise}
-To show that \(\Lambda_{t_0, v} \in \mathcal{D}'([0, T], X)\) we need to show that it is a continuous linear functional on \(\mathcal{D}([0, T])\). 
-Before we start, a quick reminder on the properties of series of functions in \(\mathcal{D}([0, T])\).
+To show that \(\Lambda_{t_0, v} \in \mathcal{D}'(0, T, X)\) we need to show that it is a continuous linear functional on \(\mathcal{D}(0, T)\). 
+Before we start, a quick reminder on the properties of series of functions in \(\mathcal{D}(0, T)\).
 \begin{remark}
-    Let \(\left\{ \phi_n \right\}_{n} \subseteq \mathcal{D}([0, T])\) be a sequence of functions that converges to \(\phi \in \mathcal{D}([0, T])\). Then we have that
+    Let \(\left\{ \phi_n \right\}_{n} \subseteq \mathcal{D}(0, T)\) be a sequence of functions that converges to \(\phi \in \mathcal{D}(0, T)\). Then we have that
     \begin{itemize}
-        \item \(\exists \text{ compact }[a, b] \subseteq [0, T] \colon \text{supp } \phi_n \subset [a, b] \quad \forall n \in \natural\)
+        \item \(\exists \text{ compact }[a, b] \subseteq (0, T) \colon \text{supp } \phi_n \subset [a, b] \quad \forall n \in \natural\)
         \item \(\phi_n^{(k)} \to \phi^{(k)}\) uniformly on \([a, b]\) for all \(k \in \natural\)
     \end{itemize}
 \end{remark}
 \textit{Linearity.} It's easy to show that \(\Lambda_{t_0, v}(\alpha \phi + \beta \psi) = \alpha \Lambda_{t_0, v}(\phi) + \beta \Lambda_{t_0, v}(\psi)\).\\
 \textit{Continuity.} 
-We take advantage of the properties of the sequence of functions in \(\mathcal{D}([0, T])\). \\
-Let \(\left\{ \phi_n \right\}_{n} \subseteq \mathcal{D}([0, T])\) be a sequence of functions
-that converges to \(\phi \in \mathcal{D}([0, T])\). In particular, we know that \(\phi_n(t_0) \to \phi(t_0)\) as \(n \to \infty\), since \(\phi_n\) converges uniformly (and pointwise) to \(\phi\) on the compact set \([a, b]\).
+We take advantage of the properties of the sequence of functions in \(\mathcal{D}(0, T)\). \\
+Let \(\left\{ \phi_n \right\}_{n} \subseteq \mathcal{D}(0, T)\) be a sequence of functions
+that converges to \(\phi \in \mathcal{D}(0, T)\). In particular, we know that \(\phi_n(t_0) \to \phi(t_0)\) as \(n \to \infty\), since \(\phi_n\) converges uniformly (and pointwise) to \(\phi\) on the compact set \([a, b]\).
 So we can exploit this fact to study the convergence of the images of the functions under \(\Lambda_{t_0, v}\).
 \[
     \begin{split}
