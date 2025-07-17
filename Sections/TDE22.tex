@@ -350,13 +350,11 @@ The strategy for this exercise remains the same as before.
 \begin{remark}
     A function belong to \(W^{1, p}(B)\) if its weak derivative exists and belongs to \(L^p(B)\).
 \end{remark}
-\textit{Frist step.} We start by checking whether $f \in L^p(B)$
+\textit{First step.} We start by checking whether $f \in L^p(B)$ using spherical coordinates:
 \[
-    \begin{split}
-        \int_B \abs{f}^p \, dx &= \int_B \abs{\frac{\sin\abs{x}}{\abs{x}^3}}^p \, dx = \int_0^1 \int_{\left\{\abs{x} = \rho\right\}} \frac{\abs{\sin\rho}^p}{\rho^{3p}} \, d\sigma \, d\rho \\
-                               &= \sigma_n \int_0^1 \frac{\abs{\sin\rho}^p}{\rho^{3p}} \rho^{n-1} \, d\rho
-    \end{split}
+    \int_B \abs{f}^p \, dx = \int_B \abs{\frac{\sin\abs{x}}{\abs{x}^3}}^p \, dx = \omega_n \int_0^1 \frac{\abs{\sin\rho}^p}{\rho^{3p}} \rho^{n-1} \, d\rho
 \]
+where \(\omega_n\) is the surface measure of the unit sphere in \(\real^n\).
 Since $\sin \rho \sim \rho$ as $\rho \rightarrow 0$ we have that the integral is finite if
 \[
     \begin{split}
@@ -379,11 +377,9 @@ In particular, we have that
 \abs{\grad f} & = \abs{\frac{\partial f}{\partial \rho}} = \abs{\frac{\rho^3 \cos\rho  - 3 \rho^2 \sin\rho }{\rho^6}}
 \end{align*}
 Now we need to look for the values of $p$ for which \(\grad f \in L^p(B)\):
-
-\begin{align*}
-\int_\Omega \abs{\grad f}^p \, dx &= \int_0^1 \int_{\left\{\abs{x} = \rho\right\}} \abs{\frac{\rho \cos\rho  - 3 \sin\rho }{\rho^4}}^p \, d\sigma \, d\rho 
-                                  &= \sigma_n \int_0^1 \abs{\frac{\rho \cos\rho  - 3 \sin\rho }{\rho^4}}^p \rho^{n-1} \, d\rho \\
-\end{align*}
+\begin{equation*}
+\int_\Omega \abs{\grad f}^p \, dx = \omega_n \int_0^1 \abs{\frac{\rho \cos\rho  - 3 \sin\rho }{\rho^4}}^p \rho^{n-1} \, d\rho \\
+\end{equation*}
 In this case we observe that $\rho \cos\rho  - 3 \sin\rho \sim -2\rho$ as $\rho \to 0$, so we need that
 \[
     \begin{split}
@@ -392,7 +388,8 @@ In this case we observe that $\rho \cos\rho  - 3 \sin\rho \sim -2\rho$ as $\rho 
 \]
 So we have that \(\grad f \in L^p(B)\) if \(p \in [1, \frac{n}{3})\), and $n$ must be greater than 3.\\
 \vspace{0.1cm}\\
-\textit{Third step.} In order to justify other procedure and conclude that $f \in W^{1,p}(\Omega)$, 
+\textit{Third step.} In order to justify other procedure and conclude that $f \in W^{1,p}(\Omega)$, calling $\Omega$ the unit ball in $\real^n$, 
+we need to check that the weak derivative of \(f\) exists and coincides with the a.e. derivative.
 it remains to verify whether the weak derivative of \(f\) exists and coincides with the a.e. derivative.
 We have that the weak derivative of \(f\) exists if
 \begin{equation}\label{eq:weak_derivative}
@@ -444,7 +441,7 @@ Moreover,
 \[
     \begin{split}
         \abs{\int_{\partial B_\epsilon} f \phi \nu_i \, d\sigma} & \leq \int_{\partial B_\epsilon} \abs{f} \abs{\phi} \underbrace{\abs{\nu_i}}_{\leq 1} \, d\sigma \leq \max_{\partial B_\epsilon} \abs{\phi} \int_{\{ \abs{x} = \epsilon \}} \abs{f} \, d\sigma \\
-                                                                 & = \max_{\partial B_\epsilon} \abs{\phi} \abs{\frac{\sin\epsilon}{\epsilon^3}} \sigma_n \epsilon^{n-1} = C \abs{\frac{\sin\epsilon}{\epsilon^3}} \epsilon^{n-1}
+                                                                 & = \max_{\partial B_\epsilon} \abs{\phi} \abs{\frac{\sin\epsilon}{\epsilon^3}} \omega_n \epsilon^{n-1} = C \abs{\frac{\sin\epsilon}{\epsilon^3}} \epsilon^{n-1}
     \end{split}
 \]
 We have that 
