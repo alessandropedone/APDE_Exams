@@ -130,44 +130,39 @@
             \frac{d}{ds} \left(cg(s) + a g'(s) + g(s)^2\right) = const.
         \end{split}
     \]
-    We assume it is homogeneous, so we have
+    We assume it is homogeneous (we have in mind something like \(g\in \mathcal{S}(\mathbb{R})\)), so we have
     \[
         \begin{split}
-            g'(s) =- \frac{c}{a} g(s)  -\frac{1}{a} g(s)^2
+            g'(s) =- \frac{c}{a} g(s)  -\frac{1}{a} g(s)^2  \implies \frac{g'(s)}{g(s)^2} + \frac{c}{a} \frac{1}{g(s)} + \frac{1}{a} = 0
         \end{split}
     \]
     This is a Bernoulli equation, which can be solved by the substitution \(y(s) = g(s)^{-1}\). We obtain
     \[
-        y(s) = \frac{1}{g(s)} \Rightarrow y'(s) = -\frac{g'(s)}{g(s)^2} 
+    \begin{split}
+        y(s) &= \frac{1}{g(s)}\\ 
+        y'(s) &= -\frac{g'(s)}{g(s)^2} 
+    \end{split}
     \]
     We substitute this into the equation
     \[
-        \begin{split}
-            \left(\frac{c}{a} g(s)  + \frac{1}{a} g(s)^2\right) \frac{1}{g(s)^2} = \frac{c}{a} y(s) + \frac{1}{a} = y'(s)
-        \end{split}
+        -y'(s) + \frac{c}{a} y(s) + \frac{1}{a} = 0 \Rightarrow y'(s) - \frac{c}{a} y(s) = \frac{1}{a}
     \]
-    So we have the ODE  
+    We can solve this ODE by multiplying by the integrating factor \(e^{\int -\frac{c}{a} \, ds}\)
     \[
         \begin{split}
-            y'(s) - \frac{c}{a} y(s) = \frac{1}{a}
-        \end{split}
-    \]
-    We can solve this ODE by multiplying by the integrating factor \(e^{\int \frac{c}{a} \, ds}\)
-    \[
-        \begin{split}
-            e^{\frac{c}{a}s} y'(s) - \frac{c}{a} e^{\frac{c}{a}s} y(s) = \frac{1}{a} e^{\frac{c}{a}s} \Rightarrow \left(e^{\frac{c}{a}s} y(s)\right)' = \frac{1}{a} e^{\frac{c}{a}s}
+            e^{-\frac{c}{a}s} y'(s) - \frac{c}{a} e^{-\frac{c}{a}s} y(s) = \frac{1}{a} e^{-\frac{c}{a}s} \Rightarrow \left(e^{-\frac{c}{a}s} y(s)\right)' = \frac{1}{a} e^{-\frac{c}{a}s}
         \end{split}
     \]
     We can now integrate both sides
     \[
         \begin{split}
-            e^{\frac{c}{a}s} y(s) = \frac{1}{a} \int e^{\frac{c}{a}s} \, ds \Rightarrow y(s) = \frac{1}{c} + C e^{-\frac{c}{a}s}
+            e^{-\frac{c}{a}s} y(s) = \frac{1}{a} \int e^{-\frac{c}{a}s} \, ds \Rightarrow y(s) = -\frac{1}{c} + C e^{\frac{c}{a}s}
         \end{split}
     \]
     We can now substitute back \(y(s) = g(s)^{-1}\) and solve for \(g(s)\)
     \[
         \begin{split}
-            g(s) = y(s)^{-1} = \frac{1}{\frac{1}{c} + C e^{-\frac{c}{a}s}}
+            g(s) = y(s)^{-1} = \frac{1}{-\frac{1}{c} + C e^{\frac{c}{a}s}}
         \end{split}
     \]
 \end{enumerate}
