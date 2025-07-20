@@ -157,9 +157,9 @@ Since we know that if a solution satisfies \(u \in L^s(0,T;\bm{L}^r) \text{ with
               \end{cases}
           \]
           This cannot be a classical solution, since it is not differentiable at \(x=0\).
-          And it is not a weak solution since it doesn't satisfy the jump condition (Rankine-Hugoniot), as
-          we will see in a moment. Infact, to compute the shock speed, we define and
-          compute
+          And it is not a weak solution since it doesn't satisfy the jump condition
+          (Rankine-Hugoniot), as we will see in a moment. Infact, to compute the shock
+          speed, we define and compute
           \[B(u) = \int_0^u A(s) \, ds = u - u \log(u).\]
           So we obtain that
           \[
@@ -1506,68 +1506,106 @@ solution is unique.
     \end{equation*}
     Determine the maximal domain \(A\) of definition of the solution as continuous function: explain if they are also of class \(C^1(A)\) and satisfy the entropy condition.
 \end{exercise}
-\begin{enumerate}
-    \item[\textbf{a)}] We look for solutions \(u(x, t) \in C^1(\real \times (0, \infty))\) that satisfy the conservation law and the initial condition.
-          Its characteristics are given by
-          \[
-              \frac{du}{dt} = \frac{dt}{ds} \frac{du}{dt} + \frac{dx}{ds} \frac{du}{dx} = 0
-          \]
-          means that \(u\) is constant along the characteristics and then
-          \[
-              u(x,t) = u(x_0,0) = \sqrt[3]{x_0}
-          \]
-          with \(t=s\) since the initial condition is given at \(t=0\).
-          \[
-              \frac{dx}{ds} = u_0^3 \quad \Rightarrow \quad x(s) = x_0 + s u_0^3
-          \]
-          Since \(u_0^3 = (\sqrt[3]{x_0})^3 = x_0\), we have that \(x(s) = x_0 + s x_0 =
-          x_0(1+s)\). We can then write the solution as
-          \[
-              x(s) = x_0 + s x_0 = x_0(1+s) \quad \Rightarrow \quad x_0 = \frac{x}{1+s}.
-          \]
-          The solution is then
-          \[
-              u(x,t) = \sqrt[3]{\frac{x}{1+t}}.
-          \]
-          This is a classical solution that remains smooth for all \(x \in \real\) and
-          \(t > 0\), so the maximal domain of definition is \(A = \real \times (0,
-          \infty)\). Let's compute the derivatives of \(u\)
-          \begin{align*}
-              u_x(x,t) & = \frac{1}{3} \frac{1}{\sqrt[2]{\frac{x}{1+t}}^2}         \\
-              u_t(x,t) & = -\frac{1}{3(1+t)^2} \frac{1}{\sqrt[3]{\frac{x}{1+t}}^2}
-          \end{align*}
-          These are not continuous at \(x=0\), so the solution is not of class \(C^1(A)\). Since we do not have a discontinuity in our solution, the entropy condition is satisfied.
-    \item[\textbf{b)}] Now we look at the second case.
+\begin{remark}
+    The problem, for a quasilinear partial differential equation,
+    \[
+        \left\{
+        \begin{array}{ll}
+            u_t + A(u) u_x = 0, & (x, t) \in \mathbb{R} \times \mathbb{R}_+ \\
+            u(x, 0) = g(x),     & x \in \mathbb{R}
+        \end{array}
+        \right.
+    \]
+    is equavalent to the following parametric system of ordinary differential
+    equations, where the parameter is \(x_0 \in \mathbb{R}\):
+    \[
+        \renewcommand{\arraystretch}{2.5}
+        \left\{
+        \begin{array}{ll}
 
-          Its characteristics are given by
+            \frac{dt}{ds} = 1,    & t(0) = 0      \\
+            \frac{dx}{ds} = A(u), & x(0) = x_0    \\
+            \frac{du}{ds} = 0,    & u(0) = g(x_0)
+        \end{array}
+        \right.
+        \quad \Rightarrow \quad
+        \renewcommand{\arraystretch}{1.5}
+        \left\{
+        \begin{array}{l}
+            t = s + 0       \\
+            x = A(u)s + x_0 \\
+            u = g(x_0)
+        \end{array}
+        \right.
+    \]
+    So the characteristic lines at \(x_0\) are given by \[x(t) = x_0 + A(g(x_0))t\] and the solution is constant along the characteristics. For those interested in
+    understanding (briefly) more generally the method of characteristics for
+    quasilinear equations, a more detailed discussion can be found in Chapter 2.2
+    of the \href{https://github.com/alessandropedone/cauchy-kowalevski-theorem}
+    {\textcolor{blue}{Bachelor's thesis of one of the contributors}}.
+\end{remark}
+\begin{enumerate}
+    \item[\textbf{a)}]
+
+          In this case, we have that \(A(u) = -2u^3\) and \(g(x) = \sqrt[3]{x}\). So the
+          characteristic lines are given by
           \[
-              \frac{du}{dt} = \frac{dt}{ds} \frac{du}{dt} + \frac{dx}{ds} \frac{du}{dx} = 0
+              x(s) = x_0 - 2 x_0 s.
           \]
-          means that \(u\) is constant along the characteristics and then
+          And now we want to find the solution \(u\) along the characteristics. Since
+          \(u\) is constant along the characteristics, we search the point \((x_0, 0)\)
+          such that the corresponding characteristic line passes through \((x, t)\):
           \[
-              u(x,t) = u(x_0,0) = -\sqrt[3]{x_0}
-          \]
-          with \(t=s\) since the initial condition is given at \(t=0\).
-          \[
-              \frac{dx}{ds} = u_0^3 \quad \Rightarrow \quad x(s) = x_0 + s u_0^3
-          \]
-          Since \(u_0^3 = (-\sqrt[3]{x_0})^3 = -x_0\), we have that \(x(s) = x_0 - s x_0
-          = x_0(1-s)\). We can then write the solution as
-          \[
-              x(s) = x_0 + s x_0 = x_0(1+s) \quad \Rightarrow \quad x_0 = \frac{x}{1-s}.
+              x_0 + A(g(x_0)) t = x \quad \Rightarrow \quad x_0 = \frac{x}{1-2t}.
           \]
           The solution is then
           \[
-              u(x,t) = \sqrt[3]{\frac{x}{1-t}}.
+              u(x,t) = g(x_0(x,t)) = \sqrt[3]{\frac{x}{1-2t}}.
           \]
-          We can immediately see that this solution present a discontinuity in \(t=1\) so
-          the maximal domain of definition is \(A = \real \times (0, 1)\). Let's compute
-          the derivatives of \(u\)
+          We can immediately see that this solution present a discontinuity in \(t=1/2\)
+          so the maximal domain of definition is \(A = \real \times (0, 1/2)\). Let's
+          compute the derivatives of \(u\)
           \begin{align*}
-              u_x(x,t) & = -\frac{1}{3} \frac{1}{\sqrt[2]{\frac{x}{1+t}}^2}       \\
-              u_t(x,t) & = \frac{1}{3(1+t)^2} \frac{1}{\sqrt[3]{\frac{x}{1+t}}^2}
+              u_x(x,t) & = \frac{1}{3} \frac{1}{\sqrt[3]{\frac{x}{1-2t}}^2}.
           \end{align*}
-          These are not continuous at \(x=0\), so the solution is not of class \(C^1(A)\). No idea about the entropy condition.
+          This is not continuous at \(x=0\), so the solution is not of class \(C^1(A)\) ($g$ is not $C^1$).
+          The entropy condition cannot be satisfied since the solution is unbounded as \(t \to 1/2\):
+          \[
+              u(x+a,t) - u(x,t) = \underbrace{\frac{(x+a)^{1/3}-x^{1/3}}{(1-2t)^{1/3}}}_{\rightarrow \infty}
+              \leq \underbrace{\frac{Ea}{t}}_{\rightarrow 2Ea}.
+          \]
+          \textit{Remark.} One can also compute the shock time \(T\) as
+          \[
+              T = - \frac{1}{\inf_\xi A'(g(\xi))g'(\xi)} = -\frac{1}{-2} = \frac{1}{2}.
+          \]
+    \item[\textbf{b)}]
+
+          In this case, we have that \(A(u) = -2u^3\) and \(g(x) = -\sqrt[3]{x}\). So the
+          characteristic lines are given by
+          \[
+              x(s) = x_0 + 2 x_0 s.
+          \]
+          And now we want to find the solution \(u\) along the characteristics. Since
+          \(u\) is constant along the characteristics, we search the point \((x_0, 0)\)
+          such that the corresponding characteristic line passes through \((x, t)\):
+          \[
+              x_0 + A(g(x_0)) t = x \quad \Rightarrow \quad x_0 = \frac{x}{1+2t}.
+          \]
+          The solution is then
+          \[
+              u(x,t) = g(x_0(x,t)) = -\sqrt[3]{\frac{x}{1+2t}}.
+          \]
+          Here he maximal domain of definition is \(A = \real \times (0, \infty)\). Let's
+          compute the derivatives of \(u\)
+          \begin{align*}
+              u_x(x,t) & = -\frac{1}{3} \frac{1}{\sqrt[3]{\frac{x}{1+2t}}^2}.
+          \end{align*}
+          This is not continuous at \(x=0\), so the solution is not of class \(C^1(A)\) ($g$ is not $C^1$).
+          The entropy condition cannot be satisfied since the solution goes to zero as too slowly as \(t \to \infty\):
+          for every $x$, $E>0$ and $a > 0$, there alaways exists a $t$ big enough such that
+          \[
+              u(x+a,t) - u(x,t) = \frac{(x+a)^{1/3}-x^{1/3}}{(1+2t)^{1/3}} > \frac{Ea}{t}.
+          \]
 \end{enumerate}
 
 \newpage
