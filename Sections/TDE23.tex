@@ -64,85 +64,160 @@ Since we know that if a solution satisfies \(u \in L^s(0,T;\bm{L}^r) \text{ with
     \end{equation*}
     Discuss existence and uniqueness of classical and weak solutions for Cauchy problems. Then estabilish whether the found solutions satisfy the entropy condition.
 \end{exercise}
+\begin{remark}
+    The problem, for a quasilinear partial differential equation,
+    \[
+        \left\{
+        \begin{array}{ll}
+            u_t + A(u) u_x = 0, & (x, t) \in \mathbb{R} \times \mathbb{R}_+ \\
+            u(x, 0) = g(x),     & x \in \mathbb{R}
+        \end{array}
+        \right.
+    \]
+    is equavalent to the following parametric system of ordinary differential
+    equations, where the parameter is \(x_0 \in \mathbb{R}\):
+    \[
+        \renewcommand{\arraystretch}{2.5}
+        \left\{
+        \begin{array}{ll}
+
+            \frac{dt}{ds} = 1,    & t(0) = 0      \\
+            \frac{dx}{ds} = A(u), & x(0) = x_0    \\
+            \frac{du}{ds} = 0,    & u(0) = g(x_0)
+        \end{array}
+        \right.
+        \quad \Rightarrow \quad
+        \renewcommand{\arraystretch}{1.5}
+        \left\{
+        \begin{array}{l}
+            t = s + 0       \\
+            x = A(u)s + x_0 \\
+            u = g(x_0)
+        \end{array}
+        \right.
+    \]
+    So the characteristic lines at \(x_0\) are given by \[x(t) = x_0 + A(g(x_0))t\] and the solution is constant along the characteristics. For those interested in
+    understanding (briefly) more generally the method of characteristics for
+    quasilinear equations, a more detailed discussion can be found in Chapter 2.2
+    of the \href{https://github.com/alessandropedone/cauchy-kowalevski-theorem}
+    {\textcolor{blue}{Bachelor's thesis of one of the contributors}}.
+\end{remark}
+
 \begin{itemize}
-    \item[\textbf{a)}] We look for solutions \(u(x, t) \in C^1(\real \times (0, \infty))\) that satisfy the conservation law and the initial condition.
-          We start with existence and uniqueness of solutions of the conservation law.
-          Its characteristics are given by
+    \item[\textbf{a)}]
+          In this case we have that \(A(u) = -\log(u)\) and \(g(x) = e^{-x}\).
+          So the characteristic lines are given by
           \[
-              \frac{du}{dt} = \frac{dt}{ds} \frac{du}{dt} + \frac{dx}{ds} \frac{du}{dx} = 0
+              x(t) = x_0 - \log(e^{-x_0})t = x_0 + x_0 t
           \]
-          means that \(u\) is constant along the characteristics and then
+          And now we want to find the solution u along the characteristics. Since u is
+          constant along the characteristics, we search the point \((x0,0)\) such that
+          the corresponding characteristic line passes through \((x,t)\):
           \[
-              u(x,t) = u(x_0,0) = e^{-x_0}.
+              x_0 + x_0 t = x \quad \Rightarrow \quad x_0 = \frac{x}{1+t}.
           \]
-          with \(t=s\) since the initial condition is given at \(t=0\).
+          The solution is then:
           \[
-              \frac{dx}{ds} = -\log(u_0) \quad \Rightarrow \quad x(s) = x_0 - s \log(u_0).
+              u(x,t) = g\left(\frac{x}{1+t}\right) = e^{-\frac{x}{1+t}}.
           \]
-          Since \(\log(u_0) = \log(e^{-x_0}) = -x_0\), we have
+          This is a classical global solution belonging to \(C^1(\real \times (0,
+          \infty))\), and thanks to the method of characteristics we have uniqueness. A
+          classical solution is also a weak solution. Moreover, the solution satisfies
+          the entropy condition, since
           \[
-              x(s) = x_0 + s x_0 = x_0(1+s) \quad \Rightarrow \quad x_0 = \frac{x}{1+s}.
+              u(x+a,t)-u(x,t) = e^{-\frac{x+a}{1+t}} - e^{-\frac{x}{1+t}} = e^{-\frac{x}{1+t}} \underbrace{\left(e^{-\frac{a}{1+t}}-1\right)}_{\leq 0} \leq 0 \leq \frac{Ea}{t}.
           \]
-          The solution is then
+    \item[\textbf{b)}]
+          In this case we have that \(A(u) = -\log(u)\) and \[g(x) = \begin{cases}
+                  1, & x < 0, \\
+                  e, & x > 0.
+              \end{cases}\]
+          The characteristics are given by
           \[
-              u(x,t) = e^{-x/(1+t)}.
+              x(t) = x_0 - \log(g(x_0))t = \begin{cases}
+                  x_0,      & x_0 < 0 \\
+                  -t + x_0, & x_0 > 0
+              \end{cases}
           \]
-          This is a classical solution and, thanks to the method of characteristics, we
-          have uniqueness. A classical solution is also a weak solution. Moreover, the
-          solution satisfies the entropy condition, since it is a global solution.
-    \item[\textbf{b)}] We have two different initial conditions, so we have to solve the conservation law for both cases.
-          \begin{enumerate}
-              \item For \(x < 0\) we have
-                    \[
-                        u(x,0) = 1
-                    \]
-                    By the method of characteristics we have again
-                    \[
-                        \frac{dx}{ds} = -\log(u_0) \quad \Rightarrow \quad x(s) = -\log(1)s = x_0.
-                    \]
-                    which is a constant. Therefore the characteristics are vertical lines and the
-                    solution is constant
-                    \[
-                        u(x,t) = 1 \quad \forall x < 0.
-                    \]
-              \item For \(x > 0\) we have
-                    \[
-                        u(x,0) = e
-                    \]
-                    By the method of characteristics we have
-                    \[
-                        \frac{dx}{ds} = -\log(u_0) \quad \Rightarrow \quad x(s) = -\log(e)s = -s + x_0.
-                    \]
-                    therefore the characteristics are given by
-                    \[
-                        u(x,t) = e \quad \forall x > 0.
-                    \]
-                    The solution is then
-                    \[
-                        u(x,t) = \begin{cases}
-                            1, & x < 0, \\
-                            e, & x > 0.
-                        \end{cases}
-                    \]
-                    This cannot be a classical solution, since it is not differentiable at \(x=0\).
-                    However, it is a weak solution. Now we have to check the entropy condition,
-                    since there is a discontinuity. We first verify the Rankine-Hugoniot condition
-                    \[
-                        s = \frac{f(u_r) - f(u_l)}{u_r - u_l} = \frac{\log(e) - \log(1)}{e - 1} = -\frac{1}{e-1}.
-                    \]
-                    To satisfy the entropy condition we need to have that the characteristics on
-                    both sides of the shock point towards the shock. To ensure this the condition
-                    \(s\) should be greater than the speed of the characteristic on the right side
-                    and less than the speed of the characteristic on the left side, \(u_L > s >
-                    u_R\)
-                    \[
-                        \begin{aligned}
-                            \text{Left side:} \quad  & u_l = 1,  \quad \Rightarrow \quad -\frac{1}{e-1} < 1 \qquad \text{True}  \\
-                            \text{Right side:} \quad & u_r = e,  \quad \Rightarrow \quad -\frac{1}{e-1} > e \qquad \text{False}
-                        \end{aligned}
-                    \]
-                    The entropy condition is not satisfied.
-          \end{enumerate}
+          And now we want to find the solution $u$ along the characteristics. Since $u$
+          is constant along the characteristics, we search the point \((x_0,0)\) such
+          that the corresponding characteristic line passes through \((x,t)\). For
+          example we have that
+          \[
+              x_0 - \log(g(x_0))t = x \quad \Rightarrow \quad x_0 = \begin{cases}
+                  x,      & x < 0, \\
+                  -t + x, & x > 0.
+              \end{cases}
+          \]
+          But this is not the only possible choice. The solution is then:
+          \[
+              u(x,t) = \begin{cases}
+                  1  & x < 0 \\
+                  e, & x > 0
+              \end{cases}
+          \]
+          This cannot be a classical solution, since it is not differentiable at \(x=0\).
+          And it is not a weak solution since it doesn't satisfy the jump condition (Rankine-Hugoniot), as
+          we will see in a moment. Infact, to compute the shock speed, we define and
+          compute
+          \[B(u) = \int_0^u A(s) \, ds = u - u \log(u).\]
+          So we obtain that
+          \[
+              \eta'(t) = \frac{[B(u)]}{[u]} = \frac{B(u_+)- B(u_-)}{u_+-u_-} = \frac{(e - e \log(e)) - (1 - 1 \log(1))}{e - 1} = \frac{1}{1-e}.
+          \]
+          So can we represent this in the \((x,t)\) plane as follows:
+          \begin{center}
+              \begin{tikzpicture}[scale=0.8]
+
+                  % Draw axes
+                  \draw[thick, ->] (-4,0) -- (3,0) node[right] {$x$};
+                  \draw[thick, ->] (0,-0.5) -- (0,6) node[above] {$t$};
+
+                  % Vertical lines when x_0 < 0
+                  \draw (-2.5,0) -- (-2.5,2.5/0.582);
+                  \draw (-2,0) -- (-2,2/0.582);
+                  \draw (-1.5,0) -- (-1.5,1.5/0.582);
+                  \draw (-1,0) -- (-1,1/0.582);
+                  \draw (-0.5,0) -- (-0.5,0.5/0.582);
+
+                  % Function η(t) = t/(1-e) ≈ t/(-1.718) ≈ -0.582t
+                  % Draw this as a function of x (treating x as t)
+                  \draw[thick, blue] (0,0) -- (-3,3/0.582) node[above] {$\eta(t) = \frac{t}{1-e}$};
+
+                  % Line x = -t + 1 when x_0 > 0, rearranged as t = -x + x_0
+                  % Extended to meet the blue line
+                  \pgfmathdeclarefunction{f}{1}{%
+                      \pgfmathparse{#1/(1-0.582)}
+                  }
+                  \draw (0.5,0) -- ({(-0.582)*f(0.5)}, {f(0.5)});
+                  \draw (1,0) -- ({(-0.582)*f(1)}, {f(1)});
+                  \draw (1.5,0) -- ({(-0.582)*f(1.5)}, {f(1.5)});
+                  \draw (2,0) -- ({(-0.582)*f(2)}, {f(2)});
+
+                  % Add region labels
+                  % Region to the left of the blue line (where solution = 1)
+                  \node at (-3, 2) {\Large $1$};
+
+                  % Region to the right of the blue line (where solution = e)
+                  \node at (1, 2) {\Large $e$};
+              \end{tikzpicture}
+          \end{center}
+          In the end, the only weak solution, i.e. the only solution the does satisfy the jump condition,
+          to this problem is
+          \[
+              u(x,t) = \begin{cases}
+                  1  & x < \eta(t) \\
+                  e, & x > \eta(t)
+              \end{cases}
+          \]
+          Now it's easy to check that the entropy condition is not satisfied, since for
+          any \(E>0\) and \(a > 0\) we can find a couple of points \(x\) and \(t\) such
+          that
+          \[
+              \underbrace{u(x+a,t)}_{=e} - \underbrace{u(x,t)}_{=1} > \frac{Ea}{t}.
+          \]
+          The idea is just to take \((x, t)\) such that \(x + a > \eta(t)\) and \(x <
+          \eta(t)\) and \(t\) big enough to make sure that $e-1>Ea/t$.
 \end{itemize}
 
 \newpage
