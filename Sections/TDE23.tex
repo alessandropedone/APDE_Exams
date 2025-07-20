@@ -110,8 +110,8 @@ Since we know that if a solution satisfies \(u \in L^s(0,T;\bm{L}^r) \text{ with
           \[
               x(t) = x_0 - \log(e^{-x_0})t = x_0 + x_0 t
           \]
-          And now we want to find the solution u along the characteristics. Since u is
-          constant along the characteristics, we search the point \((x0,0)\) such that
+          And now we want to find the solution $u$ along the characteristics. Since $u$ is
+          constant along the characteristics, we search the point \((x_0,0)\) such that
           the corresponding characteristic line passes through \((x,t)\):
           \[
               x_0 + x_0 t = x \quad \Rightarrow \quad x_0 = \frac{x}{1+t}.
@@ -764,122 +764,217 @@ We find infinitely many conserved quantities for the KdV equation, with an incre
     \]
     and determine whether it satisfies the entropy condition.
 \end{exercise}
-We start by writing the characteristics equations
+\begin{remark}
+    The problem, for a quasilinear partial differential equation,
+    \[
+        \left\{
+        \begin{array}{ll}
+            u_t + A(u) u_x = 0, & (x, t) \in \mathbb{R} \times \mathbb{R}_+ \\
+            u(x, 0) = g(x),     & x \in \mathbb{R}
+        \end{array}
+        \right.
+    \]
+    is equavalent to the following parametric system of ordinary differential
+    equations, where the parameter is \(x_0 \in \mathbb{R}\):
+    \[
+        \renewcommand{\arraystretch}{2.5}
+        \left\{
+        \begin{array}{ll}
+
+            \frac{dt}{ds} = 1,    & t(0) = 0      \\
+            \frac{dx}{ds} = A(u), & x(0) = x_0    \\
+            \frac{du}{ds} = 0,    & u(0) = g(x_0)
+        \end{array}
+        \right.
+        \quad \Rightarrow \quad
+        \renewcommand{\arraystretch}{1.5}
+        \left\{
+        \begin{array}{l}
+            t = s + 0       \\
+            x = A(u)s + x_0 \\
+            u = g(x_0)
+        \end{array}
+        \right.
+    \]
+    So the characteristic lines at \(x_0\) are given by \[x(t) = x_0 + A(g(x_0))t\] and the solution is constant along the characteristics. For those interested in
+    understanding (briefly) more generally the method of characteristics for
+    quasilinear equations, a more detailed discussion can be found in Chapter 2.2
+    of the \href{https://github.com/alessandropedone/cauchy-kowalevski-theorem}
+    {\textcolor{blue}{Bachelor's thesis of one of the contributors}}.
+\end{remark}
+
+In this case we have that \(A(u) = u\) and the initial condition is
 \[
-    \frac{du}{ds} = \frac{dt}{ds} \frac{du}{dt} + \frac{dx}{ds} \frac{du}{dx} = 0
+    g(x) = \begin{cases}
+        1,      & x < 0,     \\
+        2 - 2x, & 0 < x < 1, \\
+        0,      & x > 1.
+    \end{cases}
 \]
-we have that \(u\) is constant along the characteristics and \(t=s\) since the
-initial condition is given at \(t=0\). Now we find the characteristics
-equations from
+The characteristics are given by
 \[
-    x(t) = x_0 + u(x_0, t) t
-\]
-which gives us
-\[
-    x(t) = \begin{cases}
+    x(t) = x_0 + g(x_0) t = \begin{cases}
         x_0 + t,           & x_0 < 0,     \\
         x_0 + (2 - 2x_0)t, & 0 < x_0 < 1, \\
         x_0,               & x_0 > 1.
     \end{cases}
 \]
+
 Drawing the characteristics we have
 \begin{center}
     \begin{tikzpicture}
         \begin{axis}[
                 xlabel={$x$}, ylabel={$t$},
-                xmin=-1, xmax=2, ymin=0, ymax=1.5,
-                axis lines=middle, grid=major,
-                samples=20, domain=-2:1, legend pos=outer north east
+                xmin=-1, xmax=2, ymin=0, ymax=2,
+                axis lines=middle,
             ]
 
-            % Plot characteristics for u_0(x) = 1 for x <= 0
-
-            \addplot[black, thick, domain=-2:-0.6] {x -0.4}; % Characteristic with slope 1
-            \addplot[black, thick, domain=-2:-0.8] {x - 0.2}; % Characteristic with slope 1
-            \addplot[black, thick, domain=-1:1] {x}; % Characteristic with slope 1
-            \addplot[black, thick, domain=-1:0.8] {x + 0.2}; % Characteristic with slope 1
-            \addplot[black, thick, domain=-1:0.6] {x + 0.4}; % Characteristic with slope 1
-            \addplot[black, thick, domain=-1:0.4] {x + 0.6}; % Characteristic with slope 1
-            \addplot[black, thick, domain=-1:0.2] {x + 0.8}; % Characteristic with slope 1
-            \addplot[black, thick, domain=-1:0] {x + 1}; % Characteristic with slope 1
+            % Plot characteristics for\ u_0(x) = 1 for x <= 0
+            \addplot[black, domain=-1:1] {x}; % Characteristic with slope 1
+            \addplot[black, domain=-1:0.8] {x + 0.2}; % Characteristic with slope 1
+            \addplot[black, domain=-1:0.6] {x + 0.4}; % Characteristic with slope 1
+            \addplot[black, domain=-1:0.4] {x + 0.6}; % Characteristic with slope 1
+            \addplot[black, domain=-1:0.2] {x + 0.8}; % Characteristic with slope 1
 
             % Plot characteristics for u_0(x) = 2 - 2x for 0 < x < 1
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) * 0.1};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) * 0.2};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) * 0.3};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) * 0.4};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) * 0.5};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) * 0.75};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x)};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) * 1.5};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) * 2};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) * 2.5};
-            \addplot[black, thick,domain=0:1] {x - (2 - 2*x) *3};
+            \addplot[black, domain=0:1] {(x-0)/(2-2*0)};
+            \addplot[black, domain=0:1] {(x-0.2)/(2-2*0.2)};
+            \addplot[black, domain=0:1] {(x-0.4)/(2-2*0.4)};
+            \addplot[black, domain=0:1] {(x-0.6)/(2-2*0.6)};
+            \addplot[black, domain=0:1] {(x-0.8)/(2-2*0.8)};
 
             % Plot characteristics for u_0(x) = 0 for x > 1
             \draw[color=black]
-            (axis cs:1.01, 0) -- (axis cs:1.01, 1);
+            (axis cs:1, 0) -- (axis cs:1, 1);
             \draw[color=black]
             (axis cs:1.2, 0) -- (axis cs:1.2, 1);
             \draw[color=black]
             (axis cs:1.4, 0) -- (axis cs:1.4, 1);
-            \draw[color=black]
-            (axis cs:1.6, 0) -- (axis cs:1.6, 1);
-            \draw[color=black]
-            (axis cs:1.8, 0) -- (axis cs:1.8, 1);
-            \draw[color=black]
-            (axis cs:2, 0) -- (axis cs:2, 1);
         \end{axis}
     \end{tikzpicture}
 \end{center}
-that the characteristic do not intersect at least until \(t=1\).
-Therefore, the function \(u(x,t)\) is defined continuous in \(\real \times [0, 1)\) and it is written as
+that the characteristic do not intersect at least until \(t=\frac{1}{2}\).
+In fact, we observe that
+\[
+    T = - \frac{1}{\inf_\xi A'(g(\xi))g'(\xi)} = - \frac{1}{-2} = \frac{1}{2}
+\]
+And now we want to find the solution $u$ along the characteristics. Since $u$
+is constant along the characteristics, we search the point \((x_0, 0)\) such
+that the corresponding characteristic line passes through \((x, t)\):
+\[
+    x_0 + A(g(x_0))t = x \Rightarrow x_0 = \begin{cases}
+        x - t,                 & x < t,      \\
+        \frac{x - 2t}{1 - 2t}, & 2t < x < 1, \\
+        x,                     & x > 1.
+    \end{cases}
+\]
+Therefore, the function \(u(x,t)\) is defined as follows:
 \[
     u(x,t) = \begin{cases}
-        1,                 & x \leq t,  \\
-        \frac{2-2x}{1-2t}, & t < x < 1, \\
-        0,                 & x \geq 1.
+        1,                        & x \leq t,   \\
+        2-2\frac{x - 2t}{1 - 2t}, & 2t < x < 1, \\
+        0,                        & x > 1.
     \end{cases}
 \]
-We want to extend the solution to \(t > 1\). We need the solution to undergo a
-jump, so given \(x = \eta(t)\) the curve of discontinuity, we have that
-\[
-    u(x, t) = \begin{cases}
-        u_- = 1, & x < \eta(t) \\
-        u_+ = 0, & x > \eta(t)
-    \end{cases}
-\]
-The jump conditions states that
-\[
-    \eta'(t) \cdot \left[u_+ - u_-\right] = \left[B(u_+) - B(u_-)\right] \quad \text{on } \Gamma
-\]
-Here we have that \(B(u) = \frac{u^2}{2}\), so the jump condition becomes
-\[
-    \eta'(t) = \frac{u_+^2 - u_-^2}{u_+ - u_-} = \frac{1}{2}
-\]
-and the solution is
-\[
-    \eta(t) = \frac{t}{2} + C
-\]
-But, we know that \(\eta(1) = 1\), so \(C = 1/2\) and the solution is
-\[
-    u(x,t) = \begin{cases}
-        1, & x < \frac{1}{2}(t+1), \\
-        0, & x > \frac{1}{2}(t+1).
-    \end{cases}
-\]
-Which is a discontinuous solution.
+And we can represent it graphically as follows:
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+                xlabel={$x$}, ylabel={$t$},
+                xmin=-1, xmax=2, ymin=0, ymax=2,
+                axis lines=middle,
+            ]
 
-To satisfy the entropy condition we need to have that the characteristics on
-both sides of the shock point towards the shock. To ensure this the condition
-\(s = \eta'(t)\) should be less than the speed of the characteristic on the
-right side and greater than the speed of the characteristic on the left side.
-We have
-\begin{align*}
-    \text{Left side:}  & \quad u_-(x,t) = 1, \Rightarrow \frac{1}{2} < 1, \quad \text{True} \\
-    \text{Right side:} & \quad u_+(x,t) = 0, \Rightarrow \frac{1}{2} > 0, \quad \text{True}
-\end{align*}
-Therefore the solution satisfies the entropy condition.
+            % Plot characteristics for\ u_0(x) = 1 for x <= 0
+            \addplot[black, domain=-1:1] {x}; % Characteristic with slope 1
+
+            % Plot characteristics for u_0(x) = 2 - 2x for 0 < x < 1
+            \addplot[black, domain=0:1] {(x-0)/(2-2*0)};
+
+            % Plot characteristics for u_0(x) = 0 for x > 1
+            \draw[color=black]
+            (axis cs:1, 0) -- (axis cs:1, 1);
+
+            % Horizontal line for t = 1/2
+            \draw[dashed, color=red] (axis cs:-1, 0.5) -- (axis cs:2, 0.5);
+
+            % Label for the value of the solution
+            \node[color=blue] at (-0.5,0.25) {$1$};
+            \node[color=blue] at (0.75,0.15) {$\frac{2 - 2x}{1 - 2t}$};
+            \node[color=blue] at (0.5,0.35) {?};
+            \node[color=blue] at (1.5,0.25) {$0$};
+
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+In the region \(t < x < 2t\) where the solution is not defined yet, we can define it in the following way:
+\[
+    u(x,t) = \frac{x}{t} \quad \text{for } t < x < 2t.
+\]
+It's easy to see that this function still satifies the PDE and in this way we
+obtained a continuous solution, that is a weak solution too.\\ Now we want to
+extend the solution to \(t > 1/2\), and we need the solution to undergo a jump
+starting from \(t = 1/2\) at the point \((1, 1/2)\). So to obtain the shock
+speed we write the jump condition (Rankine-Hugoniot):
+\[
+    \begin{split}
+        B(u)     & = \int_0^u A(\xi) \, d\xi = \frac{u^2}{2}                                                                                                                     \\
+        \eta'(t) & = \frac{[B(u)]}{[u]} = \frac{B(u_+) - B(u_-)}{u_+ - u_-} = \frac{u_+^2 - u_-^2}{u_+ - u_-} = \frac{u_+ + u_-}{2} = \frac{\eta(t)/t + 0}{2} = \frac{\eta(t)}{2t}
+    \end{split}
+\]
+So we obtain that the shock speed is
+\[
+    \eta(t) = \sqrt{2t} \quad \text{for } t > 1/2.
+\]
+Now we update our graphical representation of the solution:
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+                xlabel={$x$}, ylabel={$t$},
+                xmin=-1, xmax=2, ymin=0, ymax=2,
+                axis lines=middle,
+            ]
+
+            % Plot characteristics for\ u_0(x) = 1 for x <= 0
+            \addplot[blue, domain=-1:1.5] {x}; % Characteristic with slope 1
+
+            % Plot characteristics for u_0(x) = 2 - 2x for 0 < x < 1
+            \addplot[blue, domain=0:1] {(x-0)/(2-2*0)};
+
+            % Plot characteristics for u_0(x) = 0 for x > 1
+            \draw[color=black]
+            (axis cs:1, 0) -- (axis cs:1, 0.5);
+
+            % Label for the value of the solution
+            \node at (0.5,1) {$1$};
+            \node at (0.75,0.15) {$\frac{2 - 2x}{1 - 2t}$};
+            \node[color=blue] at (1,0.75) {$\frac{x}{t}$};
+            \node at (1.5,0.25) {$0$};
+
+            \addplot[blue, domain=1:1.5] {x^2/2}; % Shock speed for t > 1/2
+            \node[color=blue] at (1.4,0.65) {$\eta(t)$};
+
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+And now we could decide to study what happens when to two blue lines intersect when $t = T^*$
+exploiting again the Rankine-Hugoniot condition. With a jump from 1 to 0 we obtain that the shock speed is
+\[
+    \gamma'(t) = \frac{[B(u)]}{[u]} = \frac{u_+ + u_-}{2} = \frac{1 + 0}{2} = \frac{1}{2}.
+\]
+The solution satifies the entropy condition, since for $t < T^*$ the solution
+is bounded, and 
+\[
+u(x+a,t)-u(x,t) \leq 0 \leq \frac{Ea}{t} 
+\]
+for $t > T^*$ since
+\[
+    u(x+a,t)-u(x,t) = \begin{cases}
+        0-1 = -1, & \text{if } x < \gamma(t), x+a > \gamma(t) \\
+        1-1 = 0,   & \text{if } x < \gamma(t), x+a < \gamma(t) \\
+        0-0 = 0,   & \text{if } x > \gamma(t), x+a > \gamma(t)
+    \end{cases}
+\]
 
 \newpage
 \begin{exercise}
