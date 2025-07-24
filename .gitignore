@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/macos,latex
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,latex
 
+temp.*
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
 *.aux
